@@ -2,20 +2,20 @@
 
 ## 1. Introduction
 
-In statistics and probability, **expectation** and **variance** are two fundamental concepts used to describe a random variable.
+In probability and statistics, **expectation** and **variance** are two fundamental concepts used to describe a random variable.
 
-- **Expectation (Expected Value):** Represents the long-run average value of a random variable.
-- **Variance:** Measures how spread out the values of a random variable are around its expected value.
+- **Expectation (expected value):** The probability-weighted average value of a random variable.
+- **Variance:** A measure of how spread out the values of a random variable are around its expected value.
 
 Expectation describes the center of a probability distribution, while variance describes its spread.
 
-These concepts are important in probability, statistical inference, data analysis, and machine learning.
+These concepts are widely used in statistical analysis, probability theory, and machine learning.
 
 ## 2. What Is Expectation?
 
-The **expectation**, also called the **expected value** or **mean**, is the probability-weighted average of the possible values of a random variable.
+The **expectation**, also called the **expected value** or **population mean**, is the probability-weighted average of the possible values of a random variable.
 
-It is commonly written as:
+It is written as:
 
 $$
 E[X]
@@ -25,32 +25,32 @@ The formula depends on whether the random variable is discrete or continuous.
 
 ### 2.1 Expectation of a Discrete Random Variable
 
-For a discrete random variable \(X\), the expectation is:
+For a discrete random variable \(X\), the expected value is:
 
 $$
-E[X] = \sum_x x\,P(X=x)
+E[X] = \sum_x x P(X=x)
 $$
 
 Here:
 
 - \(x\) represents a possible value of \(X\).
 - \(P(X=x)\) is the probability that \(X\) takes the value \(x\).
-- The sum runs over all possible values of \(X\).
+- The summation includes all possible values of \(X\).
 
-Each value is multiplied by its probability, and the resulting terms are added together.
+Each possible value is multiplied by its probability, and the products are added together.
 
 ### Example: Tossing a Fair Coin
 
 Suppose a fair coin is tossed once.
 
-Define the random variable \(X\) as:
+Define \(X\) as:
 
 - \(X=1\) if the outcome is heads.
 - \(X=0\) if the outcome is tails.
 
 The probability distribution is:
 
-| \(X\) | Probability |
+| \(X\) | \(P(X=x)\) |
 |---|---:|
 | 0 | 0.5 |
 | 1 | 0.5 |
@@ -65,21 +65,17 @@ $$
 E[X] = 0.5
 $$
 
-Therefore:
+Therefore, the expected value is 0.5.
 
-$$
-E[X] = 0.5
-$$
-
-**Interpretation:** The expected value is 0.5. This does not mean that a single coin toss can produce 0.5. It means that the average outcome approaches 0.5 over many independent tosses of a fair coin.
+**Interpretation:** A single toss cannot produce 0.5 heads. Instead, 0.5 is the long-run average number of heads per toss over many independent tosses of a fair coin.
 
 ### Example: Expected Number of Heads in Two Tosses
 
-Suppose a fair coin is tossed twice, and \(X\) is the number of heads.
+Suppose a fair coin is tossed twice, and \(X\) is the total number of heads.
 
-The possible values and probabilities are:
+The probability distribution is:
 
-| \(X\) | Probability |
+| \(X\) | \(P(X=x)\) |
 |---|---:|
 | 0 | 0.25 |
 | 1 | 0.50 |
@@ -99,7 +95,7 @@ $$
 E[X] = 1
 $$
 
-The expected number of heads is one.
+The expected number of heads in two tosses is 1.
 
 ## 3. Expectation of a Continuous Random Variable
 
@@ -109,9 +105,9 @@ $$
 E[X] = \int_{-\infty}^{\infty} x f_X(x)\,dx
 $$
 
-The integral weights each possible value by its probability density and accumulates the result across the distribution.
+The integral accumulates the values weighted by their probability density.
 
-The expectation exists as a finite value when the relevant integrability conditions are satisfied. A common sufficient condition is:
+The expectation is finite when the relevant integrability conditions are satisfied. A common sufficient condition is:
 
 $$
 E[|X|] < \infty
@@ -121,7 +117,7 @@ $$
 
 Suppose \(X\) follows a uniform distribution between 0 and 10.
 
-Its PDF is:
+Its probability density function is:
 
 $$
 f_X(x) =
@@ -153,18 +149,18 @@ The expected value is 5, the midpoint of the interval.
 
 ## 4. What Is Variance?
 
-**Variance** measures how much a random variable varies around its expected value.
+**Variance** measures the expected squared deviation of a random variable from its mean.
 
 It is commonly written as:
 
 $$
-\operatorname{Var}(X)
+\mathrm{Var}(X)
 $$
 
-Variance is defined as the expected squared deviation from the mean:
+The definition is:
 
 $$
-\operatorname{Var}(X) = E[(X-E[X])^2]
+\mathrm{Var}(X) = E[(X-E[X])^2]
 $$
 
 Here:
@@ -172,38 +168,36 @@ Here:
 - \(X\) is the random variable.
 - \(E[X]\) is its expected value.
 - \(X-E[X]\) is the deviation from the mean.
-- Squaring the deviation prevents positive and negative deviations from canceling each other.
+- Squaring the deviation ensures that deviations below and above the mean do not cancel each other out.
 
-A larger variance generally indicates greater spread around the mean. A variance of zero means the random variable equals a constant with probability one.
+A larger variance generally indicates greater spread around the mean. A variance of zero means that the random variable equals a constant with probability one.
 
 ### Why Do We Square the Deviations?
 
-Suppose a dataset contains values below and above the mean.
-
-If we simply average the signed deviations, the positive and negative values cancel:
+Suppose values lie both below and above their mean. If we average the signed deviations, the positive and negative deviations cancel:
 
 $$
 E[X-E[X]] = 0
 $$
 
-This happens whenever the expectation exists.
+provided the expectation exists.
 
 To measure spread, we square the deviations before averaging them:
 
 $$
-\operatorname{Var}(X) = E[(X-E[X])^2]
+\mathrm{Var}(X) = E[(X-E[X])^2]
 $$
 
 Squaring also gives greater weight to larger deviations.
 
-## 5. Formula for Variance
+## 5. Formulas for Variance
 
 ### 5.1 Variance of a Discrete Random Variable
 
 For a discrete random variable:
 
 $$
-\operatorname{Var}(X) = \sum_x (x-E[X])^2 P(X=x)
+\mathrm{Var}(X) = \sum_x (x-E[X])^2 P(X=x)
 $$
 
 The procedure is:
@@ -219,72 +213,72 @@ The procedure is:
 For a continuous random variable with PDF \(f_X(x)\):
 
 $$
-\operatorname{Var}(X) = \int_{-\infty}^{\infty} (x-E[X])^2 f_X(x)\,dx
+\mathrm{Var}(X) = \int_{-\infty}^{\infty} (x-E[X])^2 f_X(x)\,dx
 $$
 
-This formula calculates the probability-weighted average squared deviation from the mean.
+This integral calculates the probability-weighted average squared deviation from the mean.
 
 ## 6. The Shortcut Formula for Variance
 
-An equivalent formula is:
+An equivalent formula for variance is:
 
 $$
-\operatorname{Var}(X) = E[X^2] - (E[X])^2
+\mathrm{Var}(X) = E[X^2] - (E[X])^2
 $$
 
-This is often called the computational or shortcut formula for variance.
+This is called the **computational formula for variance**.
 
-The second moment is:
+For a discrete random variable:
 
 $$
 E[X^2] = \sum_x x^2 P(X=x)
 $$
 
-for a discrete random variable, or:
+For a continuous random variable:
 
 $$
 E[X^2] = \int_{-\infty}^{\infty} x^2 f_X(x)\,dx
 $$
 
-for a continuous random variable, when the corresponding expectation exists.
+These formulas apply when the corresponding moments exist.
 
-### Derivation
+### Derivation of the Shortcut Formula
 
 Start with the definition:
 
 $$
-\operatorname{Var}(X) = E[(X-E[X])^2]
+\mathrm{Var}(X) = E[(X-E[X])^2]
 $$
 
 Expand the square:
 
 $$
-\operatorname{Var}(X) = E[X^2 - 2X E[X] + (E[X])^2]
+\mathrm{Var}(X) = E[X^2 - 2X E[X] + (E[X])^2]
 $$
 
 Using the linearity of expectation:
 
 $$
-\operatorname{Var}(X) = E[X^2] - 2E[X]E[X] + (E[X])^2
+\mathrm{Var}(X) = E[X^2] - 2E[X]E[X] + (E[X])^2
 $$
 
 Simplify:
 
 $$
-\operatorname{Var}(X) = E[X^2] - 2(E[X])^2 + (E[X])^2
+\mathrm{Var}(X) = E[X^2] - 2(E[X])^2 + (E[X])^2
 $$
 
 Therefore:
 
 $$
-\operatorname{Var}(X) = E[X^2] - (E[X])^2
+\mathrm{Var}(X) = E[X^2] - (E[X])^2
 $$
 
-This formula is especially useful in probability calculations and machine-learning derivations.
+This formula is useful for simplifying probability calculations and statistical derivations.
 
 ## 7. Worked Example: Calculating Expectation and Variance
 
-Suppose a random variable \(X\) has the following probability distribution:
+Suppose a random variable \(X\) has the following distribution:
 
 | \(X\) | \(P(X=x)\) |
 |---|---:|
@@ -300,6 +294,10 @@ $$
 
 $$
 E[X] = 0(0.25) + 1(0.50) + 2(0.25)
+$$
+
+$$
+E[X] = 0 + 0.50 + 0.50
 $$
 
 $$
@@ -329,17 +327,17 @@ $$
 Use the shortcut formula:
 
 $$
-\operatorname{Var}(X) = E[X^2] - (E[X])^2
+\mathrm{Var}(X) = E[X^2] - (E[X])^2
 $$
 
 Substitute the values:
 
 $$
-\operatorname{Var}(X) = 1.5 - 1^2
+\mathrm{Var}(X) = 1.5 - 1^2
 $$
 
 $$
-\operatorname{Var}(X) = 0.5
+\mathrm{Var}(X) = 0.5
 $$
 
 Therefore:
@@ -347,14 +345,14 @@ Therefore:
 - Expected value = 1.
 - Variance = 0.5.
 
-## 8. Standard Deviation
+## 8. What Is Standard Deviation?
 
-Variance is expressed in squared units. **Standard deviation** is the square root of variance, which returns the measure of spread to the original units.
+**Standard deviation** is the square root of variance. It measures spread in the same units as the original variable.
 
-It is defined as:
+It is written as:
 
 $$
-\sigma_X = \sqrt{\operatorname{Var}(X)}
+\sigma_X = \sqrt{\mathrm{Var}(X)}
 $$
 
 For the previous example:
@@ -367,22 +365,22 @@ $$
 \sigma_X \approx 0.7071
 $$
 
-Standard deviation is often easier to interpret because it uses the same units as the original random variable.
+Standard deviation is often easier to interpret than variance because it uses the original measurement scale.
 
-### Variance vs Standard Deviation
+### Variance vs. Standard Deviation
 
 | Feature | Variance | Standard deviation |
 |---|---|---|
 | Definition | Expected squared deviation from the mean | Square root of variance |
 | Units | Squared units | Original units |
 | Interpretation | Measures squared spread | Measures spread in the original scale |
-| Value | Always nonnegative when defined | Always nonnegative when defined |
+| Value | Nonnegative | Nonnegative |
 
 ## 9. Important Properties of Expectation
 
 ### Property 1: Expectation of a Constant
 
-If \(c\) is a constant:
+For a constant \(c\):
 
 $$
 E[c] = c
@@ -398,7 +396,7 @@ $$
 
 ### Property 3: Addition of Random Variables
 
-For random variables \(X\) and \(Y\), provided their expectations exist:
+For random variables \(X\) and \(Y\), when the expectations exist:
 
 $$
 E[X+Y] = E[X] + E[Y]
@@ -406,23 +404,19 @@ $$
 
 This property does not require independence.
 
-More generally:
+More generally, for constants \(a\), \(b\), and \(c\):
 
 $$
 E[aX+bY+c] = aE[X] + bE[Y] + c
 $$
 
-for constants \(a\), \(b\), and \(c\), when the relevant expectations exist.
-
 ### Property 4: Expectation of a Function
 
-For a function \(g\), the expectation of \(g(X)\) is:
+For a discrete random variable:
 
 $$
 E[g(X)] = \sum_x g(x)P(X=x)
 $$
-
-for a discrete random variable.
 
 For a continuous random variable with a PDF:
 
@@ -430,15 +424,13 @@ $$
 E[g(X)] = \int_{-\infty}^{\infty} g(x)f_X(x)\,dx
 $$
 
-when the expectation exists.
+These formulas apply when the expectation exists.
 
-An important consequence is that the expectation of a function is not generally equal to the function of the expectation:
+In general, the expectation of a function is not equal to the function of the expectation:
 
 $$
 E[g(X)] \ne g(E[X])
 $$
-
-in general.
 
 For example, \(E[X^2]\) is not generally equal to \((E[X])^2\).
 
@@ -447,35 +439,35 @@ For example, \(E[X^2]\) is not generally equal to \((E[X])^2\).
 ### Property 1: Variance Is Nonnegative
 
 $$
-\operatorname{Var}(X) \geq 0
+\mathrm{Var}(X) \geq 0
 $$
 
 This is because squared deviations cannot be negative.
 
 ### Property 2: Variance of a Constant
 
-If \(c\) is a constant:
+For a constant \(c\):
 
 $$
-\operatorname{Var}(c) = 0
+\mathrm{Var}(c) = 0
 $$
 
 A constant has no variability.
 
 ### Property 3: Adding a Constant
 
-Adding a constant changes the mean but does not change the variance:
+Adding a constant changes the mean but not the variance:
 
 $$
-\operatorname{Var}(X+c) = \operatorname{Var}(X)
+\mathrm{Var}(X+c) = \mathrm{Var}(X)
 $$
 
-### Property 4: Multiplication by a Constant
+### Property 4: Multiplying by a Constant
 
 Multiplying a random variable by a constant changes its variance by the square of that constant:
 
 $$
-\operatorname{Var}(aX) = a^2\operatorname{Var}(X)
+\mathrm{Var}(aX) = a^2\mathrm{Var}(X)
 $$
 
 For example, doubling a random variable multiplies its variance by four.
@@ -485,7 +477,7 @@ For example, doubling a random variable multiplies its variance by four.
 For constants \(a\) and \(b\):
 
 $$
-\operatorname{Var}(aX+b) = a^2\operatorname{Var}(X)
+\mathrm{Var}(aX+b) = a^2\mathrm{Var}(X)
 $$
 
 ### Property 6: Variance of a Sum
@@ -493,24 +485,24 @@ $$
 For random variables \(X\) and \(Y\) with finite variances:
 
 $$
-\operatorname{Var}(X+Y) = \operatorname{Var}(X) + \operatorname{Var}(Y) + 2\operatorname{Cov}(X,Y)
+\mathrm{Var}(X+Y) = \mathrm{Var}(X) + \mathrm{Var}(Y) + 2\mathrm{Cov}(X,Y)
 $$
 
-Here, covariance measures how the two variables vary together.
+Covariance measures how two random variables vary together.
 
-If \(X\) and \(Y\) are independent, their covariance is zero, so:
+If \(X\) and \(Y\) are independent, their covariance is zero. Therefore:
 
 $$
-\operatorname{Var}(X+Y) = \operatorname{Var}(X) + \operatorname{Var}(Y)
+\mathrm{Var}(X+Y) = \mathrm{Var}(X) + \mathrm{Var}(Y)
 $$
 
-Independence is sufficient for this simplification, although zero covariance alone is enough for the variance formula to simplify in this way.
+Independence is sufficient for this simplification. Zero covariance is also sufficient, even when the variables are not independent.
 
 For more than two random variables, the variance of their sum includes the individual variances and twice each pairwise covariance.
 
-## 11. Expectation and Variance: An Intuitive Example
+## 11. Intuitive Example: Same Mean, Different Variance
 
-Consider two datasets:
+Consider two datasets.
 
 **Dataset A:**
 
@@ -530,19 +522,19 @@ For Dataset A, every value equals the mean, so the variance is zero.
 
 For Dataset B, the values vary around the mean, so the variance is positive.
 
-This illustrates an important point:
+This illustrates an important principle:
 
-**Two datasets can have the same mean but very different variances.**
+**Two datasets can have the same mean but different variances.**
 
 The mean describes the center, while variance describes spread around the center.
 
-## 12. Population Variance vs Sample Variance
+## 12. Population Variance vs. Sample Variance
 
-In statistics, it is important to distinguish population variance from sample variance.
+It is important to distinguish population variance from sample variance.
 
-### Population Variance
+### 12.1 Population Variance
 
-If the entire population contains \(N\) values \(x_1,x_2,\ldots,x_N\), its mean is:
+If the complete population contains \(N\) values \(x_1,x_2,\ldots,x_N\), its mean is:
 
 $$
 \mu = \frac{1}{N}\sum_{i=1}^{N}x_i
@@ -554,9 +546,9 @@ $$
 \sigma^2 = \frac{1}{N}\sum_{i=1}^{N}(x_i-\mu)^2
 $$
 
-This describes the variance of the complete population.
+This formula describes the variance of the complete population.
 
-### Sample Variance
+### 12.2 Sample Variance
 
 If we observe a sample of \(n\) values, its sample mean is:
 
@@ -564,30 +556,37 @@ $$
 \bar{x} = \frac{1}{n}\sum_{i=1}^{n}x_i
 $$
 
-The usual unbiased estimator of population variance, for independent observations sampled from a population with finite variance, is:
+The usual unbiased estimator of the population variance is:
 
 $$
 s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2
 $$
 
-The denominator is \(n-1\), rather than \(n\), because the sample mean is estimated from the same observations. This correction makes the sample variance an unbiased estimator of the population variance under the usual sampling assumptions.
+The denominator is \(n-1\), rather than \(n\), because the sample mean is estimated from the same observations. Under standard random-sampling assumptions, this correction makes the sample variance an unbiased estimator of the population variance.
 
-If the goal is simply to calculate the variance of the observed values as a dataset, dividing by \(n\) may instead be appropriate.
+If the goal is simply to calculate the variance of the observed dataset, dividing by \(n\) may be appropriate instead.
+
+### Comparison
+
+| Feature | Population variance | Usual sample variance estimator |
+|---|---|---|
+| Purpose | Describe a complete population | Estimate population variance from a sample |
+| Mean used | Population mean \(\mu\) | Sample mean \(\bar{x}\) |
+| Denominator | \(N\) | \(n-1\) |
+| Common notation | \(\sigma^2\) | \(s^2\) |
 
 ## 13. Applications in Machine Learning
 
-Expectation and variance are widely used in machine learning.
-
 ### 13.1 Bias-Variance Trade-Off
 
-The bias-variance trade-off describes two sources of prediction error in many supervised-learning settings.
+The bias-variance trade-off describes two important sources of prediction error in many supervised-learning settings.
 
 - **Bias:** Error caused by overly restrictive assumptions or systematic model limitations.
-- **Variance:** Sensitivity of a model's predictions to changes in the training data.
+- **Variance:** Sensitivity of a model's predictions to changes in its training data.
 
 A model with high bias may underfit the data. A model with high variance may overfit the training data.
 
-Balancing these factors can improve generalization to unseen data.
+Balancing these factors can help improve generalization to unseen data.
 
 ### 13.2 Feature Scaling and Standardization
 
@@ -603,95 +602,97 @@ Here:
 - \(\mu\) is the feature mean.
 - \(\sigma\) is the feature standard deviation.
 
-This transformation centers the feature around zero and scales it by its standard deviation, assuming the standard deviation is nonzero.
+This transformation centers the feature around zero and scales it by its standard deviation, provided the standard deviation is nonzero.
 
-Standardization can be useful for algorithms sensitive to feature scales, such as regularized linear models, support vector machines, and many gradient-based models.
+Standardization can be useful for algorithms sensitive to feature scales, including regularized linear models, support vector machines, and many gradient-based models.
 
 ### 13.3 Loss Functions
 
-Many machine-learning objectives involve expectations of losses.
-
-The expected loss can be written as:
+Many machine-learning objectives involve expected losses.
 
 $$
 E[L(Y,\hat{Y})]
 $$
 
-Here, \(Y\) is the true target, \(\hat{Y}\) is the prediction, and \(L\) is a loss function.
+Here:
 
-In practice, the expectation is often approximated by the average loss over training examples.
+- \(Y\) is the true target.
+- \(\hat{Y}\) is the model prediction.
+- \(L\) is the loss function.
+
+In practice, the expected loss is often approximated by the average loss over training examples.
 
 ### 13.4 Probabilistic Predictions
 
-Probabilistic models can predict both an expected outcome and a measure of uncertainty.
+Probabilistic models can estimate an expected outcome and a measure of uncertainty.
 
-For example, a model estimating delivery time may predict an expected delivery duration and the variance of the predicted distribution.
+For example, a model predicting delivery time might estimate the expected delivery duration and the variance of the predicted distribution.
 
-A larger predictive variance indicates greater uncertainty or spread under the model.
+A larger predictive variance indicates greater spread in the predicted outcomes under the model.
 
 ### 13.5 Weight Initialization and Training Stability
 
-Some neural-network initialization methods use the variance of weights to help maintain suitable activation and gradient scales across layers.
+Some neural-network initialization methods use weight variance to help maintain suitable activation and gradient scales across layers.
 
 Poorly chosen scales can contribute to vanishing or exploding activations and gradients.
 
-Variance is therefore important when designing and understanding neural-network initialization schemes.
+Variance is therefore important when designing and understanding neural-network initialization methods.
 
 ## 14. Common Mistakes
 
 ### Mistake 1: Thinking the Expected Value Must Be a Possible Outcome
 
-The expected value is a probability-weighted average. It does not need to be one of the possible values of a random variable.
+The expected value is a probability-weighted average. It does not need to be one of the possible values of the random variable.
 
-For example, a binary random variable can take only 0 or 1, but its expected value can be 0.3.
+For example, a random variable that takes only 0 or 1 can have an expected value of 0.3.
 
 ### Mistake 2: Confusing \(E[X^2]\) with \((E[X])^2\)
 
-These are different quantities in general.
+These are generally different quantities.
 
-The variance formula is:
+The correct variance formula is:
 
 $$
-\operatorname{Var}(X) = E[X^2] - (E[X])^2
+\mathrm{Var}(X) = E[X^2] - (E[X])^2
 $$
 
-It is not generally correct to replace \(E[X^2]\) with \((E[X])^2\).
+Do not assume that \(E[X^2]\) equals \((E[X])^2\).
 
 ### Mistake 3: Forgetting to Square the Constant in Variance
 
 The correct rule is:
 
 $$
-\operatorname{Var}(aX) = a^2\operatorname{Var}(X)
+\mathrm{Var}(aX) = a^2\mathrm{Var}(X)
 $$
 
 Variance scales by the square of the multiplier.
 
 ### Mistake 4: Assuming Variance Can Be Negative
 
-Variance is always nonnegative when defined because it is the expectation of a squared deviation.
+Variance cannot be negative because it is the expectation of a squared deviation.
 
-### Mistake 5: Assuming Variance Always Adds
+### Mistake 5: Assuming Variances Always Add
 
 For two random variables:
 
 $$
-\operatorname{Var}(X+Y) = \operatorname{Var}(X) + \operatorname{Var}(Y) + 2\operatorname{Cov}(X,Y)
+\mathrm{Var}(X+Y) = \mathrm{Var}(X) + \mathrm{Var}(Y) + 2\mathrm{Cov}(X,Y)
 $$
 
 The covariance term cannot be ignored unless it is zero.
 
 ### Mistake 6: Confusing Population and Sample Variance
 
-Population variance divides by \(N\). The usual unbiased sample variance estimator divides by \(n-1\).
+Population variance divides by \(N\), while the usual unbiased sample variance estimator divides by \(n-1\).
 
-The correct formula depends on whether we are describing the complete population or estimating its variance from a sample.
+The appropriate formula depends on the goal of the calculation.
 
 ## 15. Common Interview Questions and Answers
 
 ### Q1. What is expectation?
 
-**Answer:** Expectation is the probability-weighted average of the values of a random variable.
+**Answer:** Expectation is the probability-weighted average of a random variable's possible values.
 
 For a discrete random variable:
 
@@ -704,7 +705,7 @@ $$
 **Answer:** Variance measures the expected squared deviation of a random variable from its mean.
 
 $$
-\operatorname{Var}(X) = E[(X-E[X])^2]
+\mathrm{Var}(X) = E[(X-E[X])^2]
 $$
 
 ### Q3. What is the shortcut formula for variance?
@@ -712,12 +713,12 @@ $$
 **Answer:**
 
 $$
-\operatorname{Var}(X) = E[X^2] - (E[X])^2
+\mathrm{Var}(X) = E[X^2] - (E[X])^2
 $$
 
 ### Q4. What is the difference between variance and standard deviation?
 
-**Answer:** Standard deviation is the square root of variance. Variance is expressed in squared units, while standard deviation is expressed in the original units.
+**Answer:** Standard deviation is the square root of variance. Variance uses squared units, while standard deviation uses the original units.
 
 ### Q5. Can expectation be negative?
 
@@ -725,27 +726,27 @@ $$
 
 ### Q6. Can variance be negative?
 
-**Answer:** No. Variance is the expectation of a squared deviation, so it cannot be negative when defined.
+**Answer:** No. Variance is nonnegative because it is the expectation of a squared deviation, when defined.
 
 ### Q7. What happens to variance when a constant is added?
 
 **Answer:** Adding a constant does not change variance.
 
 $$
-\operatorname{Var}(X+c) = \operatorname{Var}(X)
+\mathrm{Var}(X+c) = \mathrm{Var}(X)
 $$
 
 ### Q8. What happens to variance when a random variable is multiplied by a constant?
 
-**Answer:** Variance is multiplied by the square of the constant.
+**Answer:** Variance is multiplied by the square of that constant.
 
 $$
-\operatorname{Var}(aX) = a^2\operatorname{Var}(X)
+\mathrm{Var}(aX) = a^2\mathrm{Var}(X)
 $$
 
 ### Q9. Does expectation require independence?
 
-**Answer:** No. The linearity of expectation holds without independence, provided the relevant expectations exist.
+**Answer:** No. Linearity of expectation holds without independence, provided the relevant expectations exist.
 
 $$
 E[X+Y] = E[X] + E[Y]
@@ -753,15 +754,15 @@ $$
 
 ### Q10. When can the variance of a sum be simplified?
 
-**Answer:** If the variables have zero covariance, the variance of their sum equals the sum of their variances. Independence is a sufficient condition for zero covariance when the relevant moments are finite.
+**Answer:** When the variables have zero covariance, the variance of their sum equals the sum of their variances. Independence is sufficient for zero covariance when the relevant moments are finite.
 
 ### Q11. Why is sample variance often calculated using \(n-1\)?
 
-**Answer:** Using \(n-1\) gives an unbiased estimator of population variance under standard random-sampling assumptions, because the sample mean is estimated from the same observations.
+**Answer:** Under standard random-sampling assumptions, using \(n-1\) gives an unbiased estimator of population variance because the sample mean is estimated from the same observations.
 
 ### Q12. How are expectation and variance used in machine learning?
 
-**Answer:** They are used in probabilistic prediction, feature standardization, expected-loss calculations, uncertainty estimation, neural-network initialization, and understanding the bias-variance trade-off.
+**Answer:** They are used in probabilistic predictions, feature standardization, expected-loss calculations, uncertainty estimation, neural-network initialization, and understanding the bias-variance trade-off.
 
 ## 16. Practice Problems
 
@@ -793,7 +794,7 @@ $$
 
 ### Problem 2: Calculate Variance
 
-Using the same distribution, calculate \(\operatorname{Var}(X)\).
+Using the same distribution, calculate \(\mathrm{Var}(X)\).
 
 **Step 1: Calculate the second moment.**
 
@@ -812,19 +813,19 @@ $$
 **Step 2: Apply the variance formula.**
 
 $$
-\operatorname{Var}(X) = E[X^2] - (E[X])^2
+\mathrm{Var}(X) = E[X^2] - (E[X])^2
 $$
 
 $$
-\operatorname{Var}(X) = 4.9 - 2.1^2
+\mathrm{Var}(X) = 4.9 - 2.1^2
 $$
 
 $$
-\operatorname{Var}(X) = 4.9 - 4.41
+\mathrm{Var}(X) = 4.9 - 4.41
 $$
 
 $$
-\operatorname{Var}(X) = 0.49
+\mathrm{Var}(X) = 0.49
 $$
 
 ### Problem 3: Calculate Standard Deviation
@@ -844,28 +845,28 @@ $$
 Suppose:
 
 $$
-\operatorname{Var}(X) = 4
+\mathrm{Var}(X) = 4
 $$
 
-Let \(Y=3X+2\). Calculate \(\operatorname{Var}(Y)\).
+Let \(Y=3X+2\). Calculate \(\mathrm{Var}(Y)\).
 
 **Solution:**
 
 $$
-\operatorname{Var}(3X+2) = 3^2\operatorname{Var}(X)
+\mathrm{Var}(3X+2) = 3^2\mathrm{Var}(X)
 $$
 
 $$
-\operatorname{Var}(Y) = 9(4)
+\mathrm{Var}(Y) = 9(4)
 $$
 
 $$
-\operatorname{Var}(Y) = 36
+\mathrm{Var}(Y) = 36
 $$
 
-### Problem 5: Interview Challenge
+### Problem 5: Variance of a Sum
 
-Suppose two random variables \(X\) and \(Y\) each have variance 4 and are independent.
+Suppose \(X\) and \(Y\) are independent random variables, and each has variance 4.
 
 Calculate the variance of \(X+Y\).
 
@@ -874,15 +875,15 @@ Calculate the variance of \(X+Y\).
 Because the variables are independent, their covariance is zero.
 
 $$
-\operatorname{Var}(X+Y) = \operatorname{Var}(X) + \operatorname{Var}(Y)
+\mathrm{Var}(X+Y) = \mathrm{Var}(X) + \mathrm{Var}(Y)
 $$
 
 $$
-\operatorname{Var}(X+Y) = 4 + 4
+\mathrm{Var}(X+Y) = 4 + 4
 $$
 
 $$
-\operatorname{Var}(X+Y) = 8
+\mathrm{Var}(X+Y) = 8
 $$
 
 ## 17. Final Summary
@@ -891,8 +892,7 @@ $$
 - **Variance** measures the expected squared deviation from the mean.
 - **Standard deviation** is the square root of variance.
 - The shortcut formula for variance is the second moment minus the square of the mean.
-- Expectation is linear, even when random variables are dependent.
-- The variance of a sum includes covariance terms unless those terms are zero.
+- Expectation is linear even when random variables are dependent.
+- The variance of a sum includes covariance terms unless the covariance terms are zero.
 - Population variance and sample variance use different denominators because they serve different purposes.
-- Expectation and variance are fundamental tools for statistics, uncertainty estimation, and machine learning.
-
+- Expectation and variance are fundamental to statistics, uncertainty estimation, and machine learning.
