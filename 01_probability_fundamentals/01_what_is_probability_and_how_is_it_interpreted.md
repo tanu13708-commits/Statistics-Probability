@@ -91,7 +91,7 @@ P(spam | email) = 0.92
 P(not_spam | email) = 0.08
 ```
 
-The notation \\(P(\text{spam}\mid\text{email})\\) means the probability assigned to the spam class, given the observed email and the model's assumptions.
+The notation P(spam|email) means the probability assigned to the spam class, given the observed email and the model's assumptions.
 
 The model assigns:
 
@@ -136,9 +136,9 @@ At interview level, it is useful to understand that probability is not interpret
 
 Probability is calculated from equally likely outcomes.
 
-Example: The probability of heads on a fair coin toss is \\(1/2\\).
+Example: The probability of heads on a fair coin toss is 1/2.
 
-\\[ P(\text{Heads})=\frac12 \\]
+P(heads)=1/2
 
 ### B. Frequentist interpretation
 
@@ -188,9 +188,9 @@ Distributions such as the normal, binomial and Bernoulli distributions describe 
 
 Q1. Can probability be greater than 1 or less than 0?
 
-No. For any event \\(A\\),
+No. For any event (A),
 
-\\[ 0\leq P(A)\leq 1 \\]
+0<=P(A)<=1
 
 Q2. What is the difference between probability and possibility?
 
