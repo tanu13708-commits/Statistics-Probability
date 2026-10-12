@@ -2,7 +2,7 @@
 
 ## What is Probability?
 
-Probability is a mathematical measure of how likely an event is to occur. Its value ranges from \\(0\\) to \\(1\\), where \\(0\\) represents an impossible event and \\(1\\) represents a certain event.
+Probability is a mathematical measure of how likely an event is to occur. Its value ranges from 0 to 1, where 0 represents an impossible event and 1 represents a certain event.
 
 In simple terms, probability helps us quantify uncertainty.
 
@@ -56,9 +56,9 @@ Terms such as low and high are contextual, not universal mathematical thresholds
 
 For equally likely outcomes, probability is calculated using:
 
-\\[ P(A)=\frac{\text{Favourable outcomes}}{\text{Total possible outcomes}} \\]
+ P(A)={Favourable outcomes}\{Total possible outcomes}
 
-Here, \\(P(A)\\) means the probability that event \\(A\\) occurs.
+Here, (P(A) means the probability that event (A) occurs.
 
 ### Example: Rolling a die
 
@@ -66,15 +66,15 @@ Suppose you roll a fair six-sided die and want to calculate the probability of g
 
 Possible outcomes:
 
-\\[ S=\\{1,2,3,4,5,6\\} \\]
+ S={1,2,3,4,5,6}
 
 Favourable outcomes:
 
-\\[ A=\\{2,4,6\\} \\]
+ A={2,4,6} 
 
 There are three favourable outcomes and six total outcomes.
 
-\\[ P(A)=\frac{3}{6}=\frac12=0.5 \\]
+ P(A)={3}/{6}=1/2=0.5 
 
 Therefore, the probability of rolling an even number is 0.5, or 50%.
 
