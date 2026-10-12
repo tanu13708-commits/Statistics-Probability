@@ -401,8 +401,10 @@ $$
 P(D) = (0.02)(0.60) + (0.05)(0.40)
 $$
 
+Therefore:
+
 $$
-\boxed{P(D) = 3.2\%}
+P(D) = 3.2\%
 $$
 
 A simple average would be appropriate only if the two factories contributed equally to production in this example.
@@ -583,7 +585,7 @@ $$
 Therefore:
 
 $$
-\boxed{P(P) = 0.046 = 4.6\%}
+P(P) = 0.046 = 4.6\%
 $$
 
 **Final answer:** The probability that a randomly selected visitor makes a purchase is **4.6%**.
