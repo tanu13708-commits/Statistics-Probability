@@ -11,13 +11,11 @@ Both represent numerical outcomes of random experiments, but they differ in the 
 
 A **discrete random variable** takes values from a finite or countably infinite set. A **continuous random variable** is commonly modeled using a probability density over a continuous range of values.
 
-Understanding this distinction is important for selecting probability distributions, calculating probabilities, performing statistical analysis, and building machine-learning models.
+Understanding this distinction is important for choosing probability distributions, calculating probabilities, performing statistical analysis, and building machine-learning models.
 
 ## 2. What Is a Discrete Random Variable?
 
-A discrete random variable takes values from a finite or countably infinite set.
-
-Its possible values can be listed, even if the list contains infinitely many values.
+A discrete random variable takes values from a finite or countably infinite set. Its possible values can be listed, even if the list contains infinitely many values.
 
 ### Examples
 
@@ -163,16 +161,16 @@ because including or excluding the endpoints does not change the probability.
 
 | Feature | Discrete Random Variable | Continuous Random Variable |
 |---|---|---|
-| Possible values | Finite or countably infinite | Usually values throughout continuous intervals |
+| Possible values | Finite or countably infinite | Values throughout continuous intervals in common continuous models |
 | Typical examples | Number of calls, defects, purchases | Height, weight, time, temperature |
-| Common probability representation | PMF | PDF |
+| Common probability representation | PMF | PDF, when a density exists |
 | Probability of an exact value | Can be greater than zero | Zero when the variable has a PDF |
 | Probability calculation | Sum probabilities of relevant values | Integrate density over an interval |
 | Total probability | Sum over all possible values equals 1 | Integral of the PDF over its domain equals 1 |
 | Typical distributions | Bernoulli, Binomial, Poisson | Normal, Exponential, Uniform |
 | Common data type | Counts | Measurements |
 
-**Important:** These are common patterns, not absolute rules for every application. A variable describing a measurement rounded to whole numbers can be discrete in the recorded dataset even when the underlying physical quantity is modeled as continuous.
+**Important:** These are common patterns, not absolute rules for every application. A measurement rounded to whole numbers can be discrete in the recorded dataset even when the underlying physical quantity is modeled as continuous.
 
 ## 5. Example: Comparing Discrete and Continuous Variables
 
@@ -192,10 +190,10 @@ The number of defective products must be a whole number. It cannot be 2.5 defect
 
 Therefore, \(X\) is a discrete random variable.
 
-If the probability of a product being defective is \(p\), and defects occur independently across products, then \(X\) can be modeled using a Binomial distribution:
+If the probability of a product being defective is \(p\), and defects occur independently across products with the same probability, then \(X\) can be modeled using a Binomial distribution:
 
 $$
-X\sim\operatorname{Binomial}(n=10,p)
+X\sim\mathrm{Binomial}(n=10,p)
 $$
 
 The probability of exactly \(k\) defective products is:
@@ -340,13 +338,13 @@ $$
 F_X(x)=\int_{-\infty}^{x}f_X(t)\,dt
 $$
 
-The CDF is continuous when the distribution has a PDF. It accumulates probability as \(x\) increases.
+The CDF accumulates probability as \(x\) increases. For a distribution with a PDF, the CDF is continuous.
 
 Unlike a PMF, a PDF does not directly give the probability of an exact value.
 
 ## 8. Expected Value and Variance
 
-Both discrete and continuous random variables can have an expected value and variance.
+Both discrete and continuous random variables can have an expected value and variance, provided the required expectations exist.
 
 The formulas differ according to how their probability distributions are represented.
 
@@ -368,11 +366,11 @@ $$
 E[X]=\int_{-\infty}^{\infty}xf_X(x)\,dx
 $$
 
-This integral gives the probability-weighted average over the distribution, when the expectation exists.
+This integral gives the probability-weighted average over the distribution when the expectation exists.
 
 ### 8.3 Variance
 
-For either type of random variable, variance can be defined as:
+For either type of random variable, variance is defined as:
 
 $$
 \mathrm{Var}(X)=E[(X-E[X])^2]
@@ -396,7 +394,11 @@ $$
 \mathrm{Var}(X)=\int_{-\infty}^{\infty}(x-E[X])^2f_X(x)\,dx
 $$
 
-Variance measures spread around the mean, while standard deviation is the square root of variance.
+Variance measures spread around the mean, while standard deviation is the square root of variance:
+
+$$
+\sigma_X=\sqrt{\mathrm{Var}(X)}
+$$
 
 ## 9. Common Probability Distributions
 
@@ -411,8 +413,10 @@ Models one trial with two possible outcomes, often represented as 0 and 1.
 Example: Whether a customer purchases a product.
 
 $$
-X\sim\operatorname{Bernoulli}(p)
+X\sim\mathrm{Bernoulli}(p)
 $$
+
+Here, \(p\) is the probability that \(X=1\).
 
 **Binomial distribution**
 
@@ -421,8 +425,10 @@ Models the number of successes in a fixed number of independent Bernoulli trials
 Example: Number of defective products in a fixed batch, under the required independence and equal-probability assumptions.
 
 $$
-X\sim\operatorname{Binomial}(n,p)
+X\sim\mathrm{Binomial}(n,p)
 $$
+
+Here, \(n\) is the number of trials and \(p\) is the success probability for each trial.
 
 **Poisson distribution**
 
@@ -431,8 +437,10 @@ Models a nonnegative integer count and is commonly used for the number of events
 Example: Number of customer arrivals in an hour.
 
 $$
-X\sim\operatorname{Poisson}(\lambda)
+X\sim\mathrm{Poisson}(\lambda)
 $$
+
+Here, \(\lambda>0\) is the expected event count for the interval.
 
 ### 9.2 Common Continuous Distributions
 
@@ -450,19 +458,21 @@ Here, \(\mu\) is the mean and \(\sigma^2\) is the variance.
 
 A continuous uniform distribution assigns a constant density across a specified interval.
 
-For example, if \(X\) is uniform between \(a\) and \(b\):
+If \(X\) is uniform between \(a\) and \(b\), its PDF is:
 
 $$
 f_X(x)=\frac{1}{b-a}
 \quad \text{for } a\leq x\leq b
 $$
 
+Outside this interval, the density is zero.
+
 **Exponential distribution**
 
 Often used to model waiting times under suitable assumptions, such as a constant event rate in a Poisson process.
 
 $$
-X\sim\operatorname{Exponential}(\lambda)
+X\sim\mathrm{Exponential}(\lambda)
 $$
 
 Here, \(\lambda>0\) is the rate parameter.
@@ -494,9 +504,11 @@ $$
 P(Y=1\mid X=x)
 $$
 
+This is the probability that an email is spam given its observed features.
+
 For a multiclass problem, the target may take one of several categorical values.
 
-Models such as logistic regression and Naive Bayes can be used for classification, with their specific assumptions and implementations determining how the probabilities are estimated.
+Models such as logistic regression and Naive Bayes can be used for classification, with their assumptions determining how the probabilities are estimated.
 
 ### 10.2 Regression
 
@@ -507,7 +519,7 @@ Examples include:
 - Predicting house prices.
 - Estimating delivery time.
 - Predicting temperature.
-- Forecasting product demand when demand is measured on a continuous scale.
+- Forecasting a continuous measurement.
 
 A regression model might estimate the conditional mean:
 
@@ -613,7 +625,7 @@ $$
 F_X(x)=P(X\leq x)
 $$
 
-For a discrete variable, it generally has jumps. For a variable with a continuous PDF, it is continuous.
+For a discrete variable, it generally has jumps. For a variable with a PDF, it is continuous.
 
 ### Q6. Is height a discrete or continuous random variable?
 
