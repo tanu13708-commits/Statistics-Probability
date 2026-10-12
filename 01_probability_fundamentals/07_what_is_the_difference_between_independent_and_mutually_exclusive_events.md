@@ -421,10 +421,10 @@ No. Single-label multiclass classification generally uses mutually exclusive cla
 Events or random variables are conditionally independent given another variable when, after conditioning on that variable, learning one does not change the probability distribution of the other.
 
 For two features given class `Y`, the condition is:
+
 $$
 P(X_1, X_2 \mid Y) = P(X_1 \mid Y)P(X_2 \mid Y)
 $$
-
 This is a key assumption used by Naive Bayes.
 
 ## 10. Key Takeaways
