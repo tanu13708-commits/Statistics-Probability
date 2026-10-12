@@ -1,159 +1,125 @@
-# Q11. What Are PMF, PDF, and CDF?
+# Q12. What Are Expectation and Variance?
 
 ## 1. Introduction
 
-In probability and statistics, PMF, PDF, and CDF are three important concepts used to describe probability distributions.
+In statistics and probability, **expectation** and **variance** are two fundamental concepts used to describe a random variable.
 
-- **PMF (Probability Mass Function):** Gives the probability of each possible value of a discrete random variable.
-- **PDF (Probability Density Function):** Describes probability density for a continuous random variable that has a density.
-- **CDF (Cumulative Distribution Function):** Gives the probability that a random variable is less than or equal to a specified value.
+- **Expectation (Expected Value):** Represents the long-run average value of a random variable.
+- **Variance:** Measures how spread out the values of a random variable are around its expected value.
 
-The PMF and PDF describe probability in different ways, while the CDF can be used for discrete, continuous, and mixed random variables.
+Expectation describes the center of a probability distribution, while variance describes its spread.
 
-These concepts are essential for probability calculations, statistical analysis, and machine-learning interviews.
+These concepts are important in probability, statistical inference, data analysis, and machine learning.
 
-## 2. What Is a PMF?
+## 2. What Is Expectation?
 
-A **Probability Mass Function (PMF)** gives the probability that a discrete random variable equals a particular value.
+The **expectation**, also called the **expected value** or **mean**, is the probability-weighted average of the possible values of a random variable.
 
-Its definition is:
+It is commonly written as:
 
 $$
-p_X(x) = P(X = x)
+E[X]
+$$
+
+The formula depends on whether the random variable is discrete or continuous.
+
+### 2.1 Expectation of a Discrete Random Variable
+
+For a discrete random variable \(X\), the expectation is:
+
+$$
+E[X] = \sum_x x\,P(X=x)
 $$
 
 Here:
 
-- \(X\) is a discrete random variable.
-- \(x\) is one of its possible values.
-- \(P(X=x)\) is the probability that \(X\) equals \(x\).
+- \(x\) represents a possible value of \(X\).
+- \(P(X=x)\) is the probability that \(X\) takes the value \(x\).
+- The sum runs over all possible values of \(X\).
 
-### Properties of a PMF
+Each value is multiplied by its probability, and the resulting terms are added together.
 
-**Property 1: Probabilities are nonnegative.**
+### Example: Tossing a Fair Coin
 
-$$
-p_X(x) \geq 0
-$$
+Suppose a fair coin is tossed once.
 
-**Property 2: The probabilities of all possible values sum to one.**
+Define the random variable \(X\) as:
 
-$$
-\sum_x p_X(x) = 1
-$$
-
-### Example: Tossing a Coin Twice
-
-Suppose a fair coin is tossed twice.
-
-The sample space is:
-
-$$
-S = \{HH, HT, TH, TT\}
-$$
-
-Let \(X\) represent the number of heads.
-
-| Outcome | Number of heads |
-|---|---:|
-| HH | 2 |
-| HT | 1 |
-| TH | 1 |
-| TT | 0 |
-
-The possible values are:
-
-$$
-X \in \{0,1,2\}
-$$
+- \(X=1\) if the outcome is heads.
+- \(X=0\) if the outcome is tails.
 
 The probability distribution is:
 
-| Value \(x\) | Probability \(P(X=x)\) |
+| \(X\) | Probability |
+|---|---:|
+| 0 | 0.5 |
+| 1 | 0.5 |
+
+The expected value is:
+
+$$
+E[X] = 0(0.5) + 1(0.5)
+$$
+
+$$
+E[X] = 0.5
+$$
+
+Therefore:
+
+$$
+E[X] = 0.5
+$$
+
+**Interpretation:** The expected value is 0.5. This does not mean that a single coin toss can produce 0.5. It means that the average outcome approaches 0.5 over many independent tosses of a fair coin.
+
+### Example: Expected Number of Heads in Two Tosses
+
+Suppose a fair coin is tossed twice, and \(X\) is the number of heads.
+
+The possible values and probabilities are:
+
+| \(X\) | Probability |
 |---|---:|
 | 0 | 0.25 |
 | 1 | 0.50 |
 | 2 | 0.25 |
 
-Therefore:
+The expectation is:
 
 $$
-p_X(0) = 0.25
-$$
-
-$$
-p_X(1) = 0.50
+E[X] = 0(0.25) + 1(0.50) + 2(0.25)
 $$
 
 $$
-p_X(2) = 0.25
+E[X] = 0 + 0.50 + 0.50
 $$
 
-The probabilities sum to one:
-
 $$
-0.25 + 0.50 + 0.25 = 1
+E[X] = 1
 $$
 
-**Interpretation:** The probability of getting exactly one head in two fair coin tosses is 50%.
+The expected number of heads is one.
 
-### When Is a PMF Used?
+## 3. Expectation of a Continuous Random Variable
 
-A PMF is used for discrete random variables, including:
-
-- Number of defective products.
-- Number of customers arriving in an hour.
-- Number of purchases made by a customer.
-- Number of emails received in a day.
-- A binary outcome represented by 0 or 1.
-
-## 3. What Is a PDF?
-
-A **Probability Density Function (PDF)** describes the probability density of a continuous random variable.
-
-It is commonly written as:
+For a continuous random variable \(X\) with probability density function \(f_X(x)\), the expected value is:
 
 $$
-f_X(x)
+E[X] = \int_{-\infty}^{\infty} x f_X(x)\,dx
 $$
 
-Unlike a PMF, a PDF does not directly give the probability of an exact value. Instead, we calculate probabilities over intervals by integrating the density.
+The integral weights each possible value by its probability density and accumulates the result across the distribution.
 
-For a continuous random variable with PDF \(f_X(x)\):
-
-$$
-P(a \leq X \leq b) = \int_a^b f_X(x)\,dx
-$$
-
-Here, \(a\) and \(b\) are the endpoints of the interval.
-
-### Properties of a PDF
-
-**Property 1: The density is nonnegative.**
+The expectation exists as a finite value when the relevant integrability conditions are satisfied. A common sufficient condition is:
 
 $$
-f_X(x) \geq 0
+E[|X|] < \infty
 $$
-
-**Property 2: The total integral of the density equals one.**
-
-$$
-\int_{-\infty}^{\infty} f_X(x)\,dx = 1
-$$
-
-**Property 3: An individual point has probability zero.**
-
-For a continuous random variable with a PDF:
-
-$$
-P(X=a) = 0
-$$
-
-This does not mean that the value \(a\) is impossible. It means that a single point has zero probability under a continuous distribution.
 
 ### Example: Uniform Distribution
 
-Suppose \(X\) follows a continuous uniform distribution between 0 and 10.
+Suppose \(X\) follows a uniform distribution between 0 and 10.
 
 Its PDF is:
 
@@ -165,673 +131,768 @@ f_X(x) =
 \end{cases}
 $$
 
-The density is constant between 0 and 10.
-
-The total area under the density is:
+The expected value is:
 
 $$
-\int_0^{10} \frac{1}{10}\,dx = 1
-$$
-
-Now calculate the probability that \(X\) lies between 2 and 5:
-
-$$
-P(2 \leq X \leq 5) = \int_2^5 \frac{1}{10}\,dx
+E[X] = \int_0^{10} x \frac{1}{10}\,dx
 $$
 
 $$
-P(2 \leq X \leq 5) = \frac{5-2}{10}
+E[X] = \frac{1}{10}\left[\frac{x^2}{2}\right]_0^{10}
 $$
 
 $$
-P(2 \leq X \leq 5) = 0.3
-$$
-
-The probability is 30%.
-
-However, the probability of exactly 3 is:
-
-$$
-P(X=3) = 0
-$$
-
-### Important Difference Between Density and Probability
-
-A PDF value is a density, not a probability.
-
-A PDF can have a value greater than one, provided it is nonnegative and its integral over the entire domain equals one.
-
-The probability of an interval depends on the area under the density curve, not simply the height of the curve at one point.
-
-### When Is a PDF Used?
-
-PDFs are commonly used to model continuous measurements, such as:
-
-- Height and weight.
-- Temperature.
-- Travel time.
-- Measurement errors.
-- Certain financial quantities.
-
-Common continuous distributions include the Normal, Uniform, and Exponential distributions.
-
-## 4. What Is a CDF?
-
-A **Cumulative Distribution Function (CDF)** gives the probability that a random variable is less than or equal to a specified value.
-
-It is defined as:
-
-$$
-F_X(x) = P(X \leq x)
-$$
-
-A CDF can describe any random variable, including discrete, continuous, and mixed random variables.
-
-### Properties of a CDF
-
-**Property 1: The CDF lies between zero and one.**
-
-$$
-0 \leq F_X(x) \leq 1
-$$
-
-**Property 2: The CDF is nondecreasing.**
-
-If \(a \leq b\), then:
-
-$$
-F_X(a) \leq F_X(b)
-$$
-
-This is because every outcome satisfying \(X \leq a\) also satisfies \(X \leq b\).
-
-**Property 3: The limits of the CDF are zero and one.**
-
-$$
-\lim_{x \to -\infty} F_X(x) = 0
+E[X] = \frac{100}{20}
 $$
 
 $$
-\lim_{x \to \infty} F_X(x) = 1
+E[X] = 5
 $$
 
-**Property 4: A CDF is right-continuous.**
+The expected value is 5, the midpoint of the interval.
 
-The CDF's value at a point agrees with its limit as the input approaches that point from the right.
+## 4. What Is Variance?
 
-### Example: CDF of the Number of Heads
+**Variance** measures how much a random variable varies around its expected value.
 
-Consider a fair coin tossed twice, and let \(X\) be the number of heads.
+It is commonly written as:
 
-Its PMF is:
+$$
+\operatorname{Var}(X)
+$$
 
-| Value \(x\) | Probability \(P(X=x)\) |
+Variance is defined as the expected squared deviation from the mean:
+
+$$
+\operatorname{Var}(X) = E[(X-E[X])^2]
+$$
+
+Here:
+
+- \(X\) is the random variable.
+- \(E[X]\) is its expected value.
+- \(X-E[X]\) is the deviation from the mean.
+- Squaring the deviation prevents positive and negative deviations from canceling each other.
+
+A larger variance generally indicates greater spread around the mean. A variance of zero means the random variable equals a constant with probability one.
+
+### Why Do We Square the Deviations?
+
+Suppose a dataset contains values below and above the mean.
+
+If we simply average the signed deviations, the positive and negative values cancel:
+
+$$
+E[X-E[X]] = 0
+$$
+
+This happens whenever the expectation exists.
+
+To measure spread, we square the deviations before averaging them:
+
+$$
+\operatorname{Var}(X) = E[(X-E[X])^2]
+$$
+
+Squaring also gives greater weight to larger deviations.
+
+## 5. Formula for Variance
+
+### 5.1 Variance of a Discrete Random Variable
+
+For a discrete random variable:
+
+$$
+\operatorname{Var}(X) = \sum_x (x-E[X])^2 P(X=x)
+$$
+
+The procedure is:
+
+1. Calculate the expected value.
+2. Subtract the expected value from each possible value.
+3. Square each deviation.
+4. Multiply each squared deviation by its probability.
+5. Add the weighted squared deviations.
+
+### 5.2 Variance of a Continuous Random Variable
+
+For a continuous random variable with PDF \(f_X(x)\):
+
+$$
+\operatorname{Var}(X) = \int_{-\infty}^{\infty} (x-E[X])^2 f_X(x)\,dx
+$$
+
+This formula calculates the probability-weighted average squared deviation from the mean.
+
+## 6. The Shortcut Formula for Variance
+
+An equivalent formula is:
+
+$$
+\operatorname{Var}(X) = E[X^2] - (E[X])^2
+$$
+
+This is often called the computational or shortcut formula for variance.
+
+The second moment is:
+
+$$
+E[X^2] = \sum_x x^2 P(X=x)
+$$
+
+for a discrete random variable, or:
+
+$$
+E[X^2] = \int_{-\infty}^{\infty} x^2 f_X(x)\,dx
+$$
+
+for a continuous random variable, when the corresponding expectation exists.
+
+### Derivation
+
+Start with the definition:
+
+$$
+\operatorname{Var}(X) = E[(X-E[X])^2]
+$$
+
+Expand the square:
+
+$$
+\operatorname{Var}(X) = E[X^2 - 2X E[X] + (E[X])^2]
+$$
+
+Using the linearity of expectation:
+
+$$
+\operatorname{Var}(X) = E[X^2] - 2E[X]E[X] + (E[X])^2
+$$
+
+Simplify:
+
+$$
+\operatorname{Var}(X) = E[X^2] - 2(E[X])^2 + (E[X])^2
+$$
+
+Therefore:
+
+$$
+\operatorname{Var}(X) = E[X^2] - (E[X])^2
+$$
+
+This formula is especially useful in probability calculations and machine-learning derivations.
+
+## 7. Worked Example: Calculating Expectation and Variance
+
+Suppose a random variable \(X\) has the following probability distribution:
+
+| \(X\) | \(P(X=x)\) |
 |---|---:|
 | 0 | 0.25 |
 | 1 | 0.50 |
 | 2 | 0.25 |
 
-At \(x=0\):
+### Step 1: Calculate the Expectation
 
 $$
-F_X(0) = P(X \leq 0)
-$$
-
-$$
-F_X(0) = P(X=0) = 0.25
-$$
-
-At \(x=1\):
-
-$$
-F_X(1) = P(X \leq 1)
+E[X] = \sum_x xP(X=x)
 $$
 
 $$
-F_X(1) = P(X=0) + P(X=1)
+E[X] = 0(0.25) + 1(0.50) + 2(0.25)
 $$
 
 $$
-F_X(1) = 0.25 + 0.50 = 0.75
+E[X] = 1
 $$
 
-At \(x=2\):
+### Step 2: Calculate the Second Moment
 
 $$
-F_X(2) = P(X \leq 2) = 1
+E[X^2] = \sum_x x^2 P(X=x)
 $$
 
-The CDF is therefore:
-
 $$
-F_X(x) =
-\begin{cases}
-0, & x < 0 \\
-0.25, & 0 \leq x < 1 \\
-0.75, & 1 \leq x < 2 \\
-1, & x \geq 2
-\end{cases}
+E[X^2] = 0^2(0.25) + 1^2(0.50) + 2^2(0.25)
 $$
 
-The CDF increases in steps because \(X\) is discrete.
-
-### CDF of a Continuous Random Variable
-
-For a continuous random variable with PDF \(f_X(x)\), the CDF is obtained by integrating the PDF from negative infinity to \(x\):
-
 $$
-F_X(x) = \int_{-\infty}^{x} f_X(t)\,dt
+E[X^2] = 0 + 0.50 + 1
 $$
 
-For the uniform distribution between 0 and 10:
-
 $$
-F_X(x) =
-\begin{cases}
-0, & x < 0 \\
-\frac{x}{10}, & 0 \leq x \leq 10 \\
-1, & x > 10
-\end{cases}
+E[X^2] = 1.5
 $$
 
-For example:
+### Step 3: Calculate the Variance
+
+Use the shortcut formula:
 
 $$
-F_X(4) = P(X \leq 4) = \frac{4}{10} = 0.4
+\operatorname{Var}(X) = E[X^2] - (E[X])^2
 $$
 
-This means that the probability of \(X\) being at most 4 is 40%.
-
-## 5. PMF vs PDF vs CDF
-
-| Feature | PMF | PDF | CDF |
-|---|---|---|---|
-| Full form | Probability Mass Function | Probability Density Function | Cumulative Distribution Function |
-| Main purpose | Probability of an exact discrete value | Density of a continuous distribution | Probability up to a specified value |
-| Applies to | Discrete random variables | Continuous random variables with a density | Any random variable |
-| Notation | \(p_X(x)\) | \(f_X(x)\) | \(F_X(x)\) |
-| Definition | \(P(X=x)\) | Density whose integral gives interval probability | \(P(X\leq x)\) |
-| Probability calculation | Sum probabilities | Integrate density over an interval | Evaluate the CDF or take a CDF difference |
-| Total probability | Sum equals one | Integral equals one | Approaches one as \(x\) approaches infinity |
-| Exact point probability | Can be positive | Zero for a continuous distribution with a PDF | A jump can represent point probability |
-| Typical shape | Values at discrete points | Density curve | Nondecreasing cumulative curve |
-
-### Key Formulas
-
-PMF:
+Substitute the values:
 
 $$
-p_X(x) = P(X=x)
+\operatorname{Var}(X) = 1.5 - 1^2
 $$
 
-PDF interval probability:
-
 $$
-P(a \leq X \leq b) = \int_a^b f_X(x)\,dx
+\operatorname{Var}(X) = 0.5
 $$
 
-CDF:
+Therefore:
+
+- Expected value = 1.
+- Variance = 0.5.
+
+## 8. Standard Deviation
+
+Variance is expressed in squared units. **Standard deviation** is the square root of variance, which returns the measure of spread to the original units.
+
+It is defined as:
 
 $$
-F_X(x) = P(X \leq x)
+\sigma_X = \sqrt{\operatorname{Var}(X)}
 $$
 
-For any random variable, the following formula gives the probability of the interval that excludes \(a\) and includes \(b\):
+For the previous example:
 
 $$
-P(a < X \leq b) = F_X(b) - F_X(a)
+\sigma_X = \sqrt{0.5}
 $$
 
-This formula works for discrete, continuous, and mixed distributions.
-
-For a continuous random variable with a PDF, individual points have zero probability. Therefore, including or excluding the endpoints does not change an interval's probability.
-
-## 6. Relationship Between PMF, PDF, and CDF
-
-PMF, PDF, and CDF are related ways of describing probability distributions.
-
-### 6.1 For a Discrete Random Variable
-
-The PMF gives the probability of each possible value.
-
-The CDF accumulates the PMF probabilities up to the specified value:
-
 $$
-F_X(x) = \sum_{t \leq x} p_X(t)
+\sigma_X \approx 0.7071
 $$
 
-For example:
+Standard deviation is often easier to interpret because it uses the same units as the original random variable.
+
+### Variance vs Standard Deviation
+
+| Feature | Variance | Standard deviation |
+|---|---|---|
+| Definition | Expected squared deviation from the mean | Square root of variance |
+| Units | Squared units | Original units |
+| Interpretation | Measures squared spread | Measures spread in the original scale |
+| Value | Always nonnegative when defined | Always nonnegative when defined |
+
+## 9. Important Properties of Expectation
+
+### Property 1: Expectation of a Constant
+
+If \(c\) is a constant:
 
 $$
-F_X(1) = P(X=0) + P(X=1)
+E[c] = c
 $$
 
-The PMF describes the probability at each possible value, while the CDF accumulates those probabilities.
+### Property 2: Multiplication by a Constant
 
-### 6.2 For a Continuous Random Variable
-
-The PDF describes probability density.
-
-The CDF is obtained by integrating the PDF:
+For a constant \(a\):
 
 $$
-F_X(x) = \int_{-\infty}^{x} f_X(t)\,dt
+E[aX] = aE[X]
 $$
 
-Where the CDF is differentiable, its derivative gives the PDF:
+### Property 3: Addition of Random Variables
+
+For random variables \(X\) and \(Y\), provided their expectations exist:
 
 $$
-f_X(x) = \frac{d}{dx}F_X(x)
+E[X+Y] = E[X] + E[Y]
 $$
 
-This relationship applies where the derivative exists and the distribution has a density.
+This property does not require independence.
 
-### 6.3 Recovering Interval Probabilities
-
-For any random variable:
+More generally:
 
 $$
-P(a < X \leq b) = F_X(b) - F_X(a)
+E[aX+bY+c] = aE[X] + bE[Y] + c
 $$
 
-For a continuous random variable with a PDF, the same interval probability can be calculated using an integral:
+for constants \(a\), \(b\), and \(c\), when the relevant expectations exist.
+
+### Property 4: Expectation of a Function
+
+For a function \(g\), the expectation of \(g(X)\) is:
 
 $$
-P(a \leq X \leq b) = \int_a^b f_X(x)\,dx
+E[g(X)] = \sum_x g(x)P(X=x)
 $$
 
-For a discrete random variable, the CDF difference includes the probabilities of the values in the interval \((a,b]\).
-
-## 7. Intuitive Analogy
-
-Imagine tracking the time customers take to complete an online purchase.
-
-### PMF: How Likely Is an Exact Count?
-
-Suppose we record the number of items in a customer's basket.
-
-The PMF can give the probability that a basket contains exactly three items:
-
-$$
-P(X=3)
-$$
-
-Because the number of items is discrete, the probability of an exact count can be positive.
-
-### PDF: Where Are Continuous Values Concentrated?
-
-Suppose we record how long each customer takes to complete a purchase.
-
-The PDF describes where completion times are more or less densely concentrated.
-
-A higher density near a particular time indicates greater concentration around that region. The density at a point is not the probability of that exact time.
-
-### CDF: How Much Probability Has Accumulated?
-
-The CDF gives the probability that a customer's completion time is no more than a specified duration.
-
-For example:
-
-$$
-F_X(5) = P(X \leq 5)
-$$
-
-This represents the probability that the completion time is at most five time units, assuming the units have been defined.
-
-## 8. Applications in Machine Learning
-
-PMFs, PDFs, and CDFs are useful in probabilistic modeling, prediction, and uncertainty estimation.
-
-### 8.1 Classification
-
-In classification, the target variable is often discrete.
-
-For a binary classification problem:
-
-$$
-Y \in \{0,1\}
-$$
-
-A model might estimate:
-
-$$
-P(Y=1 \mid X=x)
-$$
-
-This represents the probability that the target belongs to class 1 given the observed features.
-
-A Bernoulli distribution can model a binary target. For a multiclass problem, a categorical distribution is commonly used.
-
-### 8.2 Regression
-
-Regression often predicts continuous values such as price, temperature, or delivery time.
-
-A probabilistic regression model may estimate a conditional density:
-
-$$
-f_{Y \mid X}(y \mid x)
-$$
-
-This describes the conditional distribution of target \(Y\) given the input features \(X=x\).
-
-Such a model can estimate interval probabilities and prediction uncertainty.
-
-Some regression tasks predict counts instead, so the appropriate distribution depends on the target and modeling assumptions.
-
-### 8.3 Likelihood and Model Training
-
-Probability distributions are used to construct likelihood functions during model training.
-
-Examples include:
-
-- Bernoulli likelihood for binary outcomes.
-- Categorical likelihood for multiclass outcomes.
-- Poisson likelihood for counts under suitable assumptions.
-- Normal likelihood for continuous targets under suitable assumptions.
-
-The distribution should be chosen based on the target variable and the assumptions of the model.
-
-### 8.4 Prediction Uncertainty
-
-A CDF can answer questions about prediction uncertainty.
-
-For example, if a model predicts a distribution for delivery time, its CDF can estimate the probability that a delivery takes no more than a specified duration.
-
-Quantiles obtained from a CDF can also help construct prediction intervals and service-level estimates.
-
-### 8.5 Generative Models
-
-Generative models attempt to represent or learn probability distributions over data.
-
-- PMFs can describe discrete outcomes, such as categories or tokens.
-- PDFs can describe continuous quantities when a density exists.
-- CDFs can be used to analyze cumulative probabilities and compare distributions.
-
-## 9. Common Mistakes
-
-### Mistake 1: Thinking a PDF Value Is an Exact Probability
-
-A PDF value is a density.
+for a discrete random variable.
 
 For a continuous random variable with a PDF:
 
 $$
-P(X=a) = 0
+E[g(X)] = \int_{-\infty}^{\infty} g(x)f_X(x)\,dx
 $$
 
-Interval probabilities require integration.
+when the expectation exists.
 
-### Mistake 2: Thinking a CDF Is Only for Continuous Variables
-
-A CDF is defined for any random variable:
+An important consequence is that the expectation of a function is not generally equal to the function of the expectation:
 
 $$
-F_X(x) = P(X \leq x)
+E[g(X)] \ne g(E[X])
 $$
 
-It applies to discrete, continuous, and mixed distributions.
+in general.
 
-### Mistake 3: Confusing PMF and CDF
+For example, \(E[X^2]\) is not generally equal to \((E[X])^2\).
 
-A PMF gives the probability of a particular discrete value.
+## 10. Important Properties of Variance
 
-A CDF gives the cumulative probability up to a specified value.
-
-### Mistake 4: Assuming a PDF Must Be Less Than or Equal to One
-
-A PDF can be greater than one. It must be nonnegative and integrate to one over its full domain.
-
-### Mistake 5: Forgetting That a CDF Is Nondecreasing
-
-A CDF cannot decrease as \(x\) increases because the event \(X \leq x\) expands or stays the same.
-
-### Mistake 6: Assuming Every Random Variable Has a PDF
-
-Some distributions are discrete, and some are mixed. A PDF alone does not describe every possible probability distribution.
-
-### Mistake 7: Using the Wrong Interval Formula
-
-For any random variable:
+### Property 1: Variance Is Nonnegative
 
 $$
-P(a < X \leq b) = F_X(b) - F_X(a)
+\operatorname{Var}(X) \geq 0
 $$
 
-For a discrete distribution, including or excluding an endpoint can change the probability.
+This is because squared deviations cannot be negative.
 
-For a continuous random variable with a PDF, endpoint inclusion does not change the probability because each individual point has probability zero.
+### Property 2: Variance of a Constant
 
-## 10. Common Interview Questions and Answers
-
-### Q1. What is a PMF?
-
-**Answer:** A probability mass function gives the probability that a discrete random variable equals a specific value.
+If \(c\) is a constant:
 
 $$
-p_X(x) = P(X=x)
+\operatorname{Var}(c) = 0
 $$
 
-### Q2. What is a PDF?
+A constant has no variability.
 
-**Answer:** A probability density function describes the density of a continuous random variable. Probabilities over intervals are calculated by integrating the PDF.
+### Property 3: Adding a Constant
 
-$$
-P(a \leq X \leq b) = \int_a^b f_X(x)\,dx
-$$
-
-### Q3. What is a CDF?
-
-**Answer:** A cumulative distribution function gives the probability that a random variable is less than or equal to a specified value.
+Adding a constant changes the mean but does not change the variance:
 
 $$
-F_X(x) = P(X \leq x)
+\operatorname{Var}(X+c) = \operatorname{Var}(X)
 $$
 
-### Q4. Can a PDF be greater than one?
+### Property 4: Multiplication by a Constant
 
-**Answer:** Yes. A PDF represents density rather than point probability. It must be nonnegative and integrate to one over its domain.
-
-### Q5. Can a CDF be used for a discrete random variable?
-
-**Answer:** Yes. A CDF is defined for every random variable. For a discrete variable, it accumulates probabilities up to the specified value and typically has jumps.
-
-### Q6. How do you calculate an interval probability using a CDF?
-
-**Answer:** For any random variable:
+Multiplying a random variable by a constant changes its variance by the square of that constant:
 
 $$
-P(a < X \leq b) = F_X(b) - F_X(a)
+\operatorname{Var}(aX) = a^2\operatorname{Var}(X)
 $$
 
-### Q7. What is the relationship between a PDF and a CDF?
+For example, doubling a random variable multiplies its variance by four.
 
-**Answer:** For a continuous random variable with a PDF, the CDF is the integral of the PDF from negative infinity to \(x\). Where the CDF is differentiable, its derivative equals the PDF.
+### Property 5: Variance of a Linear Transformation
 
-### Q8. Why is the probability of an exact point zero for a continuous random variable with a PDF?
-
-**Answer:** Probability is calculated by integrating the density over a set. A single point has zero width, so its probability is zero. An interval can still have positive probability.
-
-### Q9. What is the difference between a PMF and a PDF?
-
-**Answer:** A PMF directly assigns probabilities to discrete values. A PDF describes density, and the probability of an interval is calculated by integrating that density.
-
-### Q10. How are PMF, PDF, and CDF used in machine learning?
-
-**Answer:** They help model discrete and continuous targets, calculate likelihoods, estimate class probabilities, quantify uncertainty, and evaluate probabilities of outcomes or intervals.
-
-## 11. Key Takeaways
-
-- PMF gives the probability of an exact value for a discrete random variable.
-- PDF describes the density of a continuous random variable when a density exists.
-- CDF gives the probability that a random variable is less than or equal to a specified value.
-- PMF probabilities sum to one.
-- A PDF integrates to one.
-- The probability of an exact point is zero for a continuous random variable with a PDF.
-- A PDF can be greater than one because it represents density, not point probability.
-- CDFs can describe discrete, continuous, and mixed distributions.
-- CDF differences provide interval probabilities.
-- These concepts are important for probability calculations and probabilistic machine-learning models.
-
-## 12. Practice Problems
-
-### Problem 1: PMF Calculation
-
-A fair coin is tossed twice. Let \(X\) be the number of heads.
-
-Calculate:
-
-1. \(P(X=0)\)
-2. \(P(X=1)\)
-3. \(P(X=2)\)
-
-#### Solution
-
-The sample space is:
+For constants \(a\) and \(b\):
 
 $$
-S = \{HH,HT,TH,TT\}
+\operatorname{Var}(aX+b) = a^2\operatorname{Var}(X)
 $$
 
-There is one outcome with zero heads:
+### Property 6: Variance of a Sum
+
+For random variables \(X\) and \(Y\) with finite variances:
 
 $$
-P(X=0) = \frac{1}{4} = 0.25
+\operatorname{Var}(X+Y) = \operatorname{Var}(X) + \operatorname{Var}(Y) + 2\operatorname{Cov}(X,Y)
 $$
 
-There are two outcomes with one head:
+Here, covariance measures how the two variables vary together.
+
+If \(X\) and \(Y\) are independent, their covariance is zero, so:
 
 $$
-P(X=1) = \frac{2}{4} = 0.50
+\operatorname{Var}(X+Y) = \operatorname{Var}(X) + \operatorname{Var}(Y)
 $$
 
-There is one outcome with two heads:
+Independence is sufficient for this simplification, although zero covariance alone is enough for the variance formula to simplify in this way.
+
+For more than two random variables, the variance of their sum includes the individual variances and twice each pairwise covariance.
+
+## 11. Expectation and Variance: An Intuitive Example
+
+Consider two datasets:
+
+**Dataset A:**
 
 $$
-P(X=2) = \frac{1}{4} = 0.25
+10,\ 10,\ 10,\ 10,\ 10
 $$
 
-The probabilities sum to one:
+**Dataset B:**
 
 $$
-0.25 + 0.50 + 0.25 = 1
+2,\ 6,\ 10,\ 14,\ 18
 $$
 
-### Problem 2: PDF Calculation
+Both datasets have mean 10.
 
-Suppose \(X\) is uniformly distributed between 0 and 10.
+For Dataset A, every value equals the mean, so the variance is zero.
 
-Calculate:
+For Dataset B, the values vary around the mean, so the variance is positive.
 
-$$
-P(3 \leq X \leq 7)
-$$
+This illustrates an important point:
 
-#### Solution
+**Two datasets can have the same mean but very different variances.**
 
-The PDF is:
+The mean describes the center, while variance describes spread around the center.
 
-$$
-f_X(x) = \frac{1}{10}
-\quad \text{for } 0 \leq x \leq 10
-$$
+## 12. Population Variance vs Sample Variance
 
-Therefore:
+In statistics, it is important to distinguish population variance from sample variance.
 
-$$
-P(3 \leq X \leq 7) = \int_3^7 \frac{1}{10}\,dx
-$$
+### Population Variance
+
+If the entire population contains \(N\) values \(x_1,x_2,\ldots,x_N\), its mean is:
 
 $$
-P(3 \leq X \leq 7) = \frac{7-3}{10}
+\mu = \frac{1}{N}\sum_{i=1}^{N}x_i
+$$
+
+The population variance is:
+
+$$
+\sigma^2 = \frac{1}{N}\sum_{i=1}^{N}(x_i-\mu)^2
+$$
+
+This describes the variance of the complete population.
+
+### Sample Variance
+
+If we observe a sample of \(n\) values, its sample mean is:
+
+$$
+\bar{x} = \frac{1}{n}\sum_{i=1}^{n}x_i
+$$
+
+The usual unbiased estimator of population variance, for independent observations sampled from a population with finite variance, is:
+
+$$
+s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2
+$$
+
+The denominator is \(n-1\), rather than \(n\), because the sample mean is estimated from the same observations. This correction makes the sample variance an unbiased estimator of the population variance under the usual sampling assumptions.
+
+If the goal is simply to calculate the variance of the observed values as a dataset, dividing by \(n\) may instead be appropriate.
+
+## 13. Applications in Machine Learning
+
+Expectation and variance are widely used in machine learning.
+
+### 13.1 Bias-Variance Trade-Off
+
+The bias-variance trade-off describes two sources of prediction error in many supervised-learning settings.
+
+- **Bias:** Error caused by overly restrictive assumptions or systematic model limitations.
+- **Variance:** Sensitivity of a model's predictions to changes in the training data.
+
+A model with high bias may underfit the data. A model with high variance may overfit the training data.
+
+Balancing these factors can improve generalization to unseen data.
+
+### 13.2 Feature Scaling and Standardization
+
+Feature standardization commonly uses the mean and standard deviation:
+
+$$
+z = \frac{x-\mu}{\sigma}
+$$
+
+Here:
+
+- \(x\) is the original feature value.
+- \(\mu\) is the feature mean.
+- \(\sigma\) is the feature standard deviation.
+
+This transformation centers the feature around zero and scales it by its standard deviation, assuming the standard deviation is nonzero.
+
+Standardization can be useful for algorithms sensitive to feature scales, such as regularized linear models, support vector machines, and many gradient-based models.
+
+### 13.3 Loss Functions
+
+Many machine-learning objectives involve expectations of losses.
+
+The expected loss can be written as:
+
+$$
+E[L(Y,\hat{Y})]
+$$
+
+Here, \(Y\) is the true target, \(\hat{Y}\) is the prediction, and \(L\) is a loss function.
+
+In practice, the expectation is often approximated by the average loss over training examples.
+
+### 13.4 Probabilistic Predictions
+
+Probabilistic models can predict both an expected outcome and a measure of uncertainty.
+
+For example, a model estimating delivery time may predict an expected delivery duration and the variance of the predicted distribution.
+
+A larger predictive variance indicates greater uncertainty or spread under the model.
+
+### 13.5 Weight Initialization and Training Stability
+
+Some neural-network initialization methods use the variance of weights to help maintain suitable activation and gradient scales across layers.
+
+Poorly chosen scales can contribute to vanishing or exploding activations and gradients.
+
+Variance is therefore important when designing and understanding neural-network initialization schemes.
+
+## 14. Common Mistakes
+
+### Mistake 1: Thinking the Expected Value Must Be a Possible Outcome
+
+The expected value is a probability-weighted average. It does not need to be one of the possible values of a random variable.
+
+For example, a binary random variable can take only 0 or 1, but its expected value can be 0.3.
+
+### Mistake 2: Confusing \(E[X^2]\) with \((E[X])^2\)
+
+These are different quantities in general.
+
+The variance formula is:
+
+$$
+\operatorname{Var}(X) = E[X^2] - (E[X])^2
+$$
+
+It is not generally correct to replace \(E[X^2]\) with \((E[X])^2\).
+
+### Mistake 3: Forgetting to Square the Constant in Variance
+
+The correct rule is:
+
+$$
+\operatorname{Var}(aX) = a^2\operatorname{Var}(X)
+$$
+
+Variance scales by the square of the multiplier.
+
+### Mistake 4: Assuming Variance Can Be Negative
+
+Variance is always nonnegative when defined because it is the expectation of a squared deviation.
+
+### Mistake 5: Assuming Variance Always Adds
+
+For two random variables:
+
+$$
+\operatorname{Var}(X+Y) = \operatorname{Var}(X) + \operatorname{Var}(Y) + 2\operatorname{Cov}(X,Y)
+$$
+
+The covariance term cannot be ignored unless it is zero.
+
+### Mistake 6: Confusing Population and Sample Variance
+
+Population variance divides by \(N\). The usual unbiased sample variance estimator divides by \(n-1\).
+
+The correct formula depends on whether we are describing the complete population or estimating its variance from a sample.
+
+## 15. Common Interview Questions and Answers
+
+### Q1. What is expectation?
+
+**Answer:** Expectation is the probability-weighted average of the values of a random variable.
+
+For a discrete random variable:
+
+$$
+E[X] = \sum_x xP(X=x)
+$$
+
+### Q2. What is variance?
+
+**Answer:** Variance measures the expected squared deviation of a random variable from its mean.
+
+$$
+\operatorname{Var}(X) = E[(X-E[X])^2]
+$$
+
+### Q3. What is the shortcut formula for variance?
+
+**Answer:**
+
+$$
+\operatorname{Var}(X) = E[X^2] - (E[X])^2
+$$
+
+### Q4. What is the difference between variance and standard deviation?
+
+**Answer:** Standard deviation is the square root of variance. Variance is expressed in squared units, while standard deviation is expressed in the original units.
+
+### Q5. Can expectation be negative?
+
+**Answer:** Yes. A random variable can have a negative expected value if its probability-weighted outcomes produce a negative mean.
+
+### Q6. Can variance be negative?
+
+**Answer:** No. Variance is the expectation of a squared deviation, so it cannot be negative when defined.
+
+### Q7. What happens to variance when a constant is added?
+
+**Answer:** Adding a constant does not change variance.
+
+$$
+\operatorname{Var}(X+c) = \operatorname{Var}(X)
+$$
+
+### Q8. What happens to variance when a random variable is multiplied by a constant?
+
+**Answer:** Variance is multiplied by the square of the constant.
+
+$$
+\operatorname{Var}(aX) = a^2\operatorname{Var}(X)
+$$
+
+### Q9. Does expectation require independence?
+
+**Answer:** No. The linearity of expectation holds without independence, provided the relevant expectations exist.
+
+$$
+E[X+Y] = E[X] + E[Y]
+$$
+
+### Q10. When can the variance of a sum be simplified?
+
+**Answer:** If the variables have zero covariance, the variance of their sum equals the sum of their variances. Independence is a sufficient condition for zero covariance when the relevant moments are finite.
+
+### Q11. Why is sample variance often calculated using \(n-1\)?
+
+**Answer:** Using \(n-1\) gives an unbiased estimator of population variance under standard random-sampling assumptions, because the sample mean is estimated from the same observations.
+
+### Q12. How are expectation and variance used in machine learning?
+
+**Answer:** They are used in probabilistic prediction, feature standardization, expected-loss calculations, uncertainty estimation, neural-network initialization, and understanding the bias-variance trade-off.
+
+## 16. Practice Problems
+
+### Problem 1: Calculate Expectation
+
+A random variable \(X\) has this distribution:
+
+| \(X\) | Probability |
+|---|---:|
+| 1 | 0.2 |
+| 2 | 0.5 |
+| 3 | 0.3 |
+
+Calculate \(E[X]\).
+
+**Solution:**
+
+$$
+E[X] = 1(0.2) + 2(0.5) + 3(0.3)
 $$
 
 $$
-P(3 \leq X \leq 7) = 0.4
-$$
-
-The probability is 40%.
-
-### Problem 3: CDF Calculation
-
-Suppose \(X\) is uniformly distributed between 0 and 10.
-
-Calculate:
-
-$$
-F_X(6) = P(X \leq 6)
-$$
-
-#### Solution
-
-For this uniform distribution:
-
-$$
-F_X(x) = \frac{x}{10}
-\quad \text{for } 0 \leq x \leq 10
-$$
-
-Therefore:
-
-$$
-F_X(6) = \frac{6}{10} = 0.6
-$$
-
-The probability that \(X\) is at most 6 is 60%.
-
-### Problem 4: Use the CDF to Calculate an Interval Probability
-
-Suppose a random variable has the following CDF values:
-
-$$
-F_X(2) = 0.30
+E[X] = 0.2 + 1.0 + 0.9
 $$
 
 $$
-F_X(5) = 0.80
+E[X] = 2.1
 $$
 
-Calculate:
+### Problem 2: Calculate Variance
+
+Using the same distribution, calculate \(\operatorname{Var}(X)\).
+
+**Step 1: Calculate the second moment.**
 
 $$
-P(2 < X \leq 5)
-$$
-
-#### Solution
-
-Use the CDF difference:
-
-$$
-P(2 < X \leq 5) = F_X(5) - F_X(2)
+E[X^2] = 1^2(0.2) + 2^2(0.5) + 3^2(0.3)
 $$
 
 $$
-P(2 < X \leq 5) = 0.80 - 0.30
+E[X^2] = 0.2 + 2.0 + 2.7
 $$
 
 $$
-P(2 < X \leq 5) = 0.50
+E[X^2] = 4.9
 $$
 
-The probability is 50%.
+**Step 2: Apply the variance formula.**
+
+$$
+\operatorname{Var}(X) = E[X^2] - (E[X])^2
+$$
+
+$$
+\operatorname{Var}(X) = 4.9 - 2.1^2
+$$
+
+$$
+\operatorname{Var}(X) = 4.9 - 4.41
+$$
+
+$$
+\operatorname{Var}(X) = 0.49
+$$
+
+### Problem 3: Calculate Standard Deviation
+
+Using the variance from Problem 2:
+
+$$
+\sigma_X = \sqrt{0.49}
+$$
+
+$$
+\sigma_X = 0.7
+$$
+
+### Problem 4: Variance Under Scaling
+
+Suppose:
+
+$$
+\operatorname{Var}(X) = 4
+$$
+
+Let \(Y=3X+2\). Calculate \(\operatorname{Var}(Y)\).
+
+**Solution:**
+
+$$
+\operatorname{Var}(3X+2) = 3^2\operatorname{Var}(X)
+$$
+
+$$
+\operatorname{Var}(Y) = 9(4)
+$$
+
+$$
+\operatorname{Var}(Y) = 36
+$$
 
 ### Problem 5: Interview Challenge
 
-A continuous random variable has a PDF. An interviewer asks whether its PDF value at \(x=2\) can be 1.5.
+Suppose two random variables \(X\) and \(Y\) each have variance 4 and are independent.
 
-Is this possible?
+Calculate the variance of \(X+Y\).
 
-#### Solution
+**Solution:**
 
-Yes. A PDF can have a value greater than one, provided it remains nonnegative and its integral over the full domain equals one.
-
-The value \(f_X(2)=1.5\) is a density, not the probability that \(X=2\).
-
-For a continuous random variable with a PDF:
+Because the variables are independent, their covariance is zero.
 
 $$
-P(X=2) = 0
+\operatorname{Var}(X+Y) = \operatorname{Var}(X) + \operatorname{Var}(Y)
 $$
 
----
+$$
+\operatorname{Var}(X+Y) = 4 + 4
+$$
 
-**Final reminder:** PMF gives discrete point probabilities, PDF describes continuous probability density, and CDF gives cumulative probability for any random variable.
+$$
+\operatorname{Var}(X+Y) = 8
+$$
+
+## 17. Final Summary
+
+- **Expectation** describes the probability-weighted average of a random variable.
+- **Variance** measures the expected squared deviation from the mean.
+- **Standard deviation** is the square root of variance.
+- The shortcut formula for variance is the second moment minus the square of the mean.
+- Expectation is linear, even when random variables are dependent.
+- The variance of a sum includes covariance terms unless those terms are zero.
+- Population variance and sample variance use different denominators because they serve different purposes.
+- Expectation and variance are fundamental tools for statistics, uncertainty estimation, and machine learning.
+
