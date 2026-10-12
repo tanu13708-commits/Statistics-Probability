@@ -357,9 +357,7 @@ Naive Bayes assumes that features are conditionally independent given the class.
 For two features, `X_1` and `X_2`, and class `Y`:
 
 $$
-P(X_1, X_2 \mid Y)
-=
-P(X_1 \mid Y)P(X_2 \mid Y)
+P(X_1, X_2 \mid Y) = P(X_1 \mid Y)P(X_2 \mid Y)
 $$
 
 This means that once the class is known, observing one feature does not change the conditional probability of the other feature under the model's assumption.
@@ -423,11 +421,8 @@ No. Single-label multiclass classification generally uses mutually exclusive cla
 Events or random variables are conditionally independent given another variable when, after conditioning on that variable, learning one does not change the probability distribution of the other.
 
 For two features given class `Y`, the condition is:
-
 $$
-P(X_1, X_2 \mid Y)
-=
-P(X_1 \mid Y)P(X_2 \mid Y)
+P(X_1, X_2 \mid Y) = P(X_1 \mid Y)P(X_2 \mid Y)
 $$
 
 This is a key assumption used by Naive Bayes.
