@@ -12,7 +12,7 @@ Variance and standard deviation help answer questions such as:
 - Are the data points closely clustered or widely spread?
 - Is a dataset more consistent than another dataset?
 - How much uncertainty or variability exists in a random variable?
-- How can we measure variability in machine learning models and datasets?
+- How can we measure variability in machine learning models and datasets??
 
 For example, consider these two datasets:
 
