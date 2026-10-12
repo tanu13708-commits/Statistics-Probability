@@ -26,7 +26,7 @@ For example:
 - If the outcome is HTT, then \(X = 1\).
 - If the outcome is TTT, then \(X = 0\).
 
-Thus, the random variable converts the outcomes of a random experiment into numerical values.
+Thus, a random variable converts the outcomes of a random experiment into numerical values.
 
 ## 2. Formal Definition
 
@@ -48,7 +48,7 @@ Here:
 
 A random variable is not the same as the outcome itself. It is a numerical function defined on the outcomes.
 
-### Example
+### Example: Rolling a Die
 
 Suppose a fair die is rolled once.
 
@@ -70,8 +70,6 @@ $$
 X(4)=4,\quad X(5)=5,\quad X(6)=6
 $$
 
-In this example, the random variable assigns each outcome its corresponding numerical value.
-
 We could also define a different random variable \(Y\) that indicates whether the die roll is even:
 
 $$
@@ -82,7 +80,7 @@ Y =
 \end{cases}
 $$
 
-The same random experiment can therefore have multiple random variables, depending on what we want to measure.
+The same random experiment can have multiple random variables, depending on what we want to measure.
 
 ## 3. Types of Random Variables
 
@@ -94,8 +92,6 @@ There are two main types of random variables:
 ### 3.1 Discrete Random Variable
 
 A **discrete random variable** takes values from a finite or countably infinite set.
-
-In simple terms, its possible values can be listed, even if the list is infinite.
 
 Examples include:
 
@@ -129,9 +125,7 @@ $$
 X \in \{0,1,2\}
 $$
 
-Since \(X\) can take only these three values, it is a discrete random variable.
-
-Its probability distribution is:
+The probability distribution is:
 
 | \(x\) | \(P(X=x)\) |
 |---|---:|
@@ -159,9 +153,9 @@ Examples include:
 
 For example, the time required to complete a task might be 4.2 seconds, 4.25 seconds, or 4.251 seconds.
 
-A continuous random variable is generally described using a probability density function (PDF).
+A continuous random variable is commonly described using a probability density function (PDF).
 
-For a continuous random variable \(X\), the probability of an interval is calculated by integrating its density over that interval:
+For a continuous random variable \(X\), the probability of an interval is calculated by integrating its density:
 
 $$
 P(a \leq X \leq b) = \int_a^b f_X(x)\,dx
@@ -169,7 +163,7 @@ $$
 
 Here, \(f_X(x)\) is the probability density function.
 
-For a continuous random variable with a density:
+For a continuous random variable with a PDF:
 
 $$
 P(X=a)=0
@@ -177,7 +171,7 @@ $$
 
 for any particular value \(a\).
 
-This does not mean that the value is impossible. It means that probability is assigned to intervals, rather than to individual points.
+This does not mean that the value is impossible. It means that probability is assigned to intervals rather than individual points.
 
 For a continuous random variable:
 
@@ -185,7 +179,7 @@ $$
 P(a \leq X \leq b)=P(a < X < b)
 $$
 
-because the endpoints each have probability zero.
+because the endpoints have probability zero.
 
 ## 4. Probability Distribution of a Random Variable
 
@@ -255,7 +249,7 @@ $$
 P(a \leq X \leq b)=\int_a^b f_X(x)\,dx
 $$
 
-An important distinction is that a PDF value is a density, not the probability of observing that exact value. A density can even be greater than one, provided that it is nonnegative and integrates to one over the entire domain.
+An important distinction is that a PDF value is a density, not the probability of observing that exact value. A density can be greater than one, provided it is nonnegative and integrates to one over the entire domain.
 
 ### 4.3 Cumulative Distribution Function (CDF)
 
@@ -285,9 +279,7 @@ It approaches zero as \(x\) approaches negative infinity and approaches one as \
 
 ## 5. Expected Value of a Random Variable
 
-The **expected value** is the probability-weighted average of the values of a random variable over repeated repetitions of the same random process.
-
-It is also called the mean of the random variable.
+The **expected value** is the probability-weighted average of the values of a random variable. It is also called the mean of the random variable.
 
 ### 5.1 Expected Value of a Discrete Random Variable
 
@@ -297,11 +289,9 @@ $$
 E[X]=\sum_x xP(X=x)
 $$
 
-In words, multiply each possible value by its probability and add the results.
+Multiply each possible value by its probability and add the results.
 
 #### Example: Number of Heads in Two Fair Coin Tosses
-
-Recall the distribution:
 
 | \(x\) | \(P(X=x)\) |
 |---|---:|
@@ -335,9 +325,7 @@ $$
 E[X]=\int_{-\infty}^{\infty} x f_X(x)\,dx
 $$
 
-The integral weights each value by its probability density.
-
-The expectation exists as a finite real number when the relevant integrability conditions are satisfied, such as:
+The expectation exists as a finite real number when the appropriate integrability conditions are satisfied, such as:
 
 $$
 E[|X|]<\infty
@@ -350,33 +338,33 @@ $$
 It is defined as:
 
 $$
-\operatorname{Var}(X)=E[(X-E[X])^2]
+\mathrm{Var}(X)=E[(X-E[X])^2]
 $$
 
 An equivalent formula is:
 
 $$
-\operatorname{Var}(X)=E[X^2]-(E[X])^2
+\mathrm{Var}(X)=E[X^2]-(E[X])^2
 $$
 
 For a discrete random variable:
 
 $$
-\operatorname{Var}(X)=\sum_x (x-E[X])^2P(X=x)
+\mathrm{Var}(X)=\sum_x (x-E[X])^2P(X=x)
 $$
 
 For a continuous random variable:
 
 $$
-\operatorname{Var}(X)=\int_{-\infty}^{\infty}(x-E[X])^2f_X(x)\,dx
+\mathrm{Var}(X)=\int_{-\infty}^{\infty}(x-E[X])^2f_X(x)\,dx
 $$
 
-Variance is always nonnegative when defined.
+Variance is nonnegative when defined.
 
 The **standard deviation** is the square root of the variance:
 
 $$
-\sigma_X=\sqrt{\operatorname{Var}(X)}
+\sigma_X=\sqrt{\mathrm{Var}(X)}
 $$
 
 Variance is measured in squared units, whereas standard deviation is measured in the same units as the original variable.
@@ -402,15 +390,15 @@ $$
 Therefore:
 
 $$
-\operatorname{Var}(X)=E[X^2]-(E[X])^2
+\mathrm{Var}(X)=E[X^2]-(E[X])^2
 $$
 
 $$
-\operatorname{Var}(X)=1.50-1^2
+\mathrm{Var}(X)=1.50-1^2
 $$
 
 $$
-\operatorname{Var}(X)=0.50
+\mathrm{Var}(X)=0.50
 $$
 
 The standard deviation is:
@@ -442,7 +430,7 @@ $$
 
 This conditional expectation represents the expected target value for a given feature vector \(x\).
 
-For squared-error prediction, the conditional mean is the optimal prediction when the relevant expectation exists.
+For squared-error prediction, the conditional mean is the optimal prediction when the relevant expectations exist.
 
 ### 7.2 Classification and Probability Predictions
 
@@ -498,7 +486,7 @@ $$
 
 A model can then sample from the learned distribution to generate new observations or estimate probabilities of observed data.
 
-Understanding random variables and probability distributions is therefore essential for topics such as Bayesian modeling, Gaussian mixture models, and probabilistic generative models.
+Understanding random variables and probability distributions is essential for Bayesian modeling, Gaussian mixture models, and probabilistic generative models.
 
 ## 8. Common Mistakes
 
@@ -510,9 +498,9 @@ For example, `HHT` is an outcome of three coin tosses. The number of heads, \(X=
 
 ### Mistake 2: Assuming Every Random Variable Is Discrete
 
-Random variables can be discrete or continuous, and some distributions have both discrete and continuous components.
+Random variables can be discrete or continuous. Some distributions also contain both discrete and continuous components.
 
-The appropriate probability representation depends on the type of variable and its distribution.
+The appropriate probability representation depends on the variable and its distribution.
 
 ### Mistake 3: Treating a PDF Value as a Probability
 
@@ -530,7 +518,7 @@ For example, the expected value of a fair six-sided die roll is 3.5, even though
 
 Variance measures squared deviations from the mean. Standard deviation is the square root of variance and is expressed in the original units.
 
-### Mistake 6: Assuming a Random Variable Must Be Equally Likely to Take Its Values
+### Mistake 6: Assuming All Values of a Random Variable Are Equally Likely
 
 A random variable can assign very different probabilities to its possible values. Its probability distribution describes these differences.
 
@@ -575,13 +563,13 @@ $$
 **Answer:** Variance measures the expected squared deviation from the mean.
 
 $$
-\operatorname{Var}(X)=E[(X-E[X])^2]
+\mathrm{Var}(X)=E[(X-E[X])^2]
 $$
 
 It can also be calculated as:
 
 $$
-\operatorname{Var}(X)=E[X^2]-(E[X])^2
+\mathrm{Var}(X)=E[X^2]-(E[X])^2
 $$
 
 when the second moment is finite.
