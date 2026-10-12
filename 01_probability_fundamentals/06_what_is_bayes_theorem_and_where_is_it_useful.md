@@ -104,8 +104,7 @@ A positive result can occur in two ways:
 Therefore:
 
 $$
-P(+) = P(+ \mid D)P(D)
-+ P(+ \mid \neg D)P(\neg D)
+P(+) = P(+ \mid D)P(D) + P(+ \mid \neg D)P(\neg D)
 $$
 
 Here, `¬D` means the person does not have the disease.
@@ -153,8 +152,7 @@ $$
 Using the law of total probability:
 
 $$
-P(+) = P(+ \mid D)P(D)
-+ P(+ \mid \neg D)P(\neg D)
+P(+) = P(+ \mid D)P(D) + P(+ \mid \neg D)P(\neg D)
 $$
 
 Substitute the values:
