@@ -324,9 +324,7 @@ For example, let:
 The Naive Bayes assumption is:
 
 $$
-P(X_1, X_2 \mid Y)
-=
-P(X_1 \mid Y)P(X_2 \mid Y)
+P(X_1, X_2 \mid Y) = P(X_1 \mid Y)P(X_2 \mid Y)
 $$
 
 This is **conditional independence given the class**, not necessarily unconditional independence.
