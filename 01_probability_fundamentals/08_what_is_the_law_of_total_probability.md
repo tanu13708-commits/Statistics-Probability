@@ -2,77 +2,93 @@
 
 ## 1. Introduction
 
-The **Law of Total Probability** is a rule for calculating the probability of an event by dividing the sample space into mutually exclusive and collectively exhaustive cases.
+The **Law of Total Probability** is a fundamental rule in probability that helps us calculate the probability of an event by breaking it into several mutually exclusive and exhaustive cases.
 
-Instead of calculating the probability of an event directly, we calculate its probability under each case, multiply it by the probability of that case, and add the contributions.
+It is especially useful when an event can occur through multiple possible scenarios, and we know the probability of the event under each scenario.
 
-**Intuition:** Calculate how much each possible scenario contributes to the overall probability, then add those contributions together.
+For example, suppose two factories manufacture products. Each factory has a different defect rate. If a product is selected randomly, we can calculate the overall probability that it is defective by considering the contribution from each factory.
+
+The law combines:
+
+- The probability of each possible scenario.
+- The conditional probability of the event within that scenario.
 
 ## 2. Formal Definition
 
-Suppose \(B_1, B_2, \ldots, B_n\) form a partition of the sample space \(\Omega\). This means:
+Suppose \(B_1, B_2, \ldots, B_n\) form a partition of the sample space \(S\).
 
-1. **Mutually exclusive:** No two distinct partition events can occur simultaneously.
-2. **Collectively exhaustive:** The partition events cover the entire sample space.
+This means:
 
-Mathematically, for \(i \ne j\),
+1. The events are mutually exclusive:
 
 $$
 B_i \cap B_j = \varnothing
+\quad \text{for } i \ne j
 $$
 
-and
+2. The events are collectively exhaustive:
 
 $$
-\bigcup_{i=1}^{n} B_i = \Omega
+\bigcup_{i=1}^{n} B_i = S
 $$
 
-For any event \(A\), the Law of Total Probability is:
+3. Each event has positive probability:
 
 $$
+P(B_i) > 0
+$$
+
+For any event \(A\), the Law of Total Probability states that:
+
+$$
+\boxed{
 P(A) = \sum_{i=1}^{n} P(A \mid B_i)P(B_i)
+}
 $$
 
-Here:
-
-- \(P(A)\) is the overall probability of event \(A\).
-- \(P(B_i)\) is the probability of scenario \(B_i\).
-- \(P(A \mid B_i)\) is the probability of \(A\), given that \(B_i\) occurs.
-
-The conditional probability \(P(A \mid B_i)\) is defined when \(P(B_i)>0\). Zero-probability partition events can be omitted from the sum.
-
-By the multiplication rule,
+In expanded form:
 
 $$
-P(A \cap B_i) = P(A \mid B_i)P(B_i)
+\begin{aligned}
+P(A) ={}&
+P(A \mid B_1)P(B_1) \\
+&+ P(A \mid B_2)P(B_2) \\
+&+ \cdots \\
+&+ P(A \mid B_n)P(B_n)
+\end{aligned}
 $$
 
-Therefore, the Law of Total Probability can also be written as:
+### Meaning of the terms
 
-$$
-P(A) = \sum_{i=1}^{n} P(A \cap B_i)
-$$
+- \(A\): The event whose probability we want to calculate.
+- \(B_i\): One of the possible scenarios or categories.
+- \(P(B_i)\): The probability that scenario \(B_i\) occurs.
+- \(P(A \mid B_i)\): The probability of event \(A\), given that scenario \(B_i\) occurs.
 
-This works because the events \(A \cap B_i\) are mutually exclusive and together cover event \(A\).
+In simple terms, calculate the probability of the target event within each scenario, weight it by the probability of that scenario, and add the results.
 
-## 3. Worked Example: Defective Products
+## 3. Example: Defective Products from Two Factories
 
-Suppose a company receives products from two factories:
+Suppose a company manufactures products at two factories.
 
-- Factory A supplies 60% of the products.
-- Factory B supplies 40% of the products.
-- 2% of Factory A's products are defective.
-- 5% of Factory B's products are defective.
+The following information is available:
 
-A product is selected randomly. What is the probability that it is defective?
+| Information | Factory A | Factory B |
+|---|---:|---:|
+| Proportion of total production | 60% | 40% |
+| Defect rate | 2% | 5% |
 
-Define the events:
+A product is selected randomly from the company's total production. What is the probability that the selected product is defective?
 
-- \(A\): The product came from Factory A.
-- \(B\): The product came from Factory B.
+### Step 1: Define the events
+
+Let:
+
+- \(A\): The product comes from Factory A.
+- \(B\): The product comes from Factory B.
 - \(D\): The product is defective.
 
-Given:
+The probabilities are:
 
 $$
 P(A) = 0.60
@@ -82,6 +98,8 @@ $$
 P(B) = 0.40
 $$
 
+The conditional defect probabilities are:
+
 $$
 P(D \mid A) = 0.02
 $$
@@ -90,9 +108,13 @@ $$
 P(D \mid B) = 0.05
 $$
 
-Assume every product comes from exactly one of these two factories. Thus, \(A\) and \(B\) form a partition of the sample space.
+Since every product comes from either Factory A or Factory B, the events \(A\) and \(B\) form a partition of the sample space.
 
-Applying the Law of Total Probability:
+### Step 2: Apply the Law of Total Probability
+
+The product can be defective and come from Factory A, or it can be defective and come from Factory B.
+
+Therefore:
 
 $$
 P(D) = P(D \mid A)P(A) + P(D \mid B)P(B)
@@ -104,23 +126,35 @@ $$
 P(D) = (0.02)(0.60) + (0.05)(0.40)
 $$
 
+Calculate each contribution:
+
+$$
+P(D \mid A)P(A) = 0.012
+$$
+
+$$
+P(D \mid B)P(B) = 0.020
+$$
+
+Add the contributions:
+
 $$
 P(D) = 0.012 + 0.020
 $$
 
-$$
-P(D) = 0.032
-$$
-
-Therefore,
+Therefore:
 
 $$
-\boxed{P(D) = 3.2\%}
+\boxed{P(D) = 0.032 = 3.2\%}
 $$
 
-**Interpretation:** A randomly selected product has a 3.2% probability of being defective.
+### Interpretation
 
-We do not simply average the two defect rates. Each rate is weighted by the proportion of products supplied by its factory.
+A randomly selected product has a **3.2% probability of being defective**.
+
+Notice that we do not simply average the two defect rates. Each factory's defect rate is weighted by its proportion of total production.
+
+Factory B has a higher defect rate, but Factory A produces more products. Both factors affect the overall defect probability.
 
 ## 4. Why Do We Multiply and Then Add?
 
@@ -128,23 +162,25 @@ The formula follows from the multiplication rule and the addition rule for mutua
 
 ### Step 1: Calculate each scenario's contribution
 
-The probability that a product came from Factory A and is defective is:
+The probability that a product comes from Factory A and is defective is:
 
 $$
 P(D \cap A) = P(D \mid A)P(A)
 $$
 
-Similarly, for Factory B:
+Similarly, the probability that a product comes from Factory B and is defective is:
 
 $$
 P(D \cap B) = P(D \mid B)P(B)
 $$
 
-### Step 2: Add the contributions
+We multiply because we want the joint probability of two events occurring together.
 
-The events \(D \cap A\) and \(D \cap B\) are mutually exclusive because a product cannot come from both factories under our assumption.
+### Step 2: Add the mutually exclusive possibilities
 
-Therefore,
+A single product cannot come from both factories at the same time. Thus, the events \(D \cap A\) and \(D \cap B\) are mutually exclusive.
+
+Therefore:
 
 $$
 P(D) = P(D \cap A) + P(D \cap B)
@@ -156,207 +192,282 @@ $$
 P(D) = P(D \mid A)P(A) + P(D \mid B)P(B)
 $$
 
-This is the Law of Total Probability for two partition events.
+This is the Law of Total Probability for two scenarios.
 
-## 5. Intuitive Interpretation
-
-The overall defect probability combines two weighted contributions:
+For \(n\) possible scenarios, the same reasoning gives:
 
 $$
-\underbrace{0.60 \times 0.02}_{\text{Factory A: }1.2\%}
-+
-\underbrace{0.40 \times 0.05}_{\text{Factory B: }2.0\%}
-=
-3.2\%
+\boxed{
+P(A) = \sum_{i=1}^{n} P(A \mid B_i)P(B_i)
+}
 $$
 
-Factory B has a higher defect rate, but it supplies fewer products. The overall probability depends on both the defect rate and the probability that a randomly selected product comes from each factory.
+## 5. Intuitive Understanding
+
+Imagine that a company produces 1,000 products:
+
+- Factory A produces 600 products.
+- Factory B produces 400 products.
+
+Based on their respective defect rates:
+
+- Factory A produces an expected \(600 \times 0.02 = 12\) defective products.
+- Factory B produces an expected \(400 \times 0.05 = 20\) defective products.
+
+The expected total number of defective products is:
+
+$$
+12 + 20 = 32
+$$
+
+The overall defect rate is:
+
+$$
+\frac{32}{1000} = 0.032 = 3.2\%
+$$
+
+This gives the same result as the Law of Total Probability.
+
+The key intuition is that the overall probability is a **weighted average of the conditional probabilities**, where the weights are the probabilities of the scenarios.
 
 ## 6. Relationship to Conditional Probability and Bayes' Theorem
 
-These concepts are connected, but they answer different questions.
+These three concepts are closely related, but they answer different questions.
 
-### 6.1 Conditional Probability
+### Conditional Probability
 
-For events \(A\) and \(B\), when \(P(B)>0\),
+Conditional probability calculates the probability of an event when another event is known to have occurred.
 
 $$
 P(A \mid B) = \frac{P(A \cap B)}{P(B)}
 $$
 
-Rearranging gives the multiplication rule:
+For example, it can tell us the probability that a product is defective given that it came from Factory A.
 
-$$
-P(A \cap B) = P(A \mid B)P(B)
-$$
+### Law of Total Probability
 
-This calculates the probability that both \(A\) and \(B\) occur.
-
-### 6.2 Law of Total Probability
-
-If \(B_1, B_2, \ldots, B_n\) form a partition, then:
+The Law of Total Probability combines conditional probabilities across all possible scenarios to calculate an overall probability.
 
 $$
 P(A) = \sum_{i=1}^{n} P(A \mid B_i)P(B_i)
 $$
 
-This calculates the overall probability of \(A\) by combining its contributions across the partition.
+For example, it calculates the overall defect rate when the factory that produced a randomly selected product is not known.
 
-### 6.3 Bayes' Theorem
+### Bayes' Theorem
 
-Bayes' theorem calculates the probability of a scenario after observing an event:
+Bayes' theorem reverses a conditional probability. It helps us calculate the probability of a scenario after observing an event.
 
 $$
 P(B_j \mid A) =
 \frac{P(A \mid B_j)P(B_j)}{P(A)}
 $$
 
-When the \(B_i\) events form a partition and \(P(A)>0\), substituting the Law of Total Probability into the denominator gives:
+The Law of Total Probability can be used to calculate the denominator:
 
 $$
+P(A) = \sum_{i=1}^{n} P(A \mid B_i)P(B_i)
+$$
+
+Therefore, Bayes' theorem can also be written as:
+
+$$
+\boxed{
 P(B_j \mid A) =
 \frac{P(A \mid B_j)P(B_j)}
 {\sum_{i=1}^{n} P(A \mid B_i)P(B_i)}
+}
 $$
 
-**Example:** We know that the probability of a defective product is 3.2%. What is the probability that a defective product came from Factory A?
+### Example: Probability That a Defective Product Came from Factory A
+
+Using the previous example, we know:
 
 $$
-P(A \mid D) =
-\frac{P(D \mid A)P(A)}{P(D)}
+P(D) = 0.032
+$$
+
+Bayes' theorem gives:
+
+$$
+P(A \mid D) = \frac{P(D \mid A)P(A)}{P(D)}
 $$
 
 Substitute the values:
 
 $$
-P(A \mid D) = \frac{0.02 \times 0.60}{0.032}
+P(A \mid D) = \frac{(0.02)(0.60)}{0.032}
 $$
 
-$$
-P(A \mid D) = \frac{0.012}{0.032} = 0.375
-$$
-
-Therefore,
+Therefore:
 
 $$
-\boxed{P(A \mid D) = 37.5\%}
+\boxed{P(A \mid D) = 0.375 = 37.5\%}
 $$
 
-Although Factory A supplies 60% of all products, it accounts for 37.5% of defective products in probability terms because its defect rate is lower than Factory B's.
+**Interpretation:** If a product is known to be defective, the probability that it came from Factory A is 37.5%.
+
+This is different from \(P(D \mid A) = 2\%\). The first probability concerns the source of a defective product; the second concerns the defect status of a product from Factory A.
 
 ## 7. Applications in Machine Learning
 
+The Law of Total Probability is useful in several machine-learning and data-analysis scenarios.
+
 ### 7.1 Naive Bayes Classification
 
-Let \(X\) represent the observed features and \(Y\) represent a discrete class label.
+Naive Bayes uses Bayes' theorem to estimate the probability of a class given observed features.
 
-The marginal probability of the features is:
-
-$$
-P(X) = \sum_y P(X \mid Y=y)P(Y=y)
-$$
-
-The sum is over all possible class labels.
-
-Bayes' theorem gives:
+For a class \(C\) and feature vector \(X\):
 
 $$
-P(Y=y \mid X) =
-\frac{P(X \mid Y=y)P(Y=y)}{P(X)}
+P(C \mid X) = \frac{P(X \mid C)P(C)}{P(X)}
 $$
 
-Substituting the marginal probability gives:
+The denominator is the overall probability of observing the features. For a set of mutually exclusive and exhaustive classes \(C_1, C_2, \ldots, C_n\), it can be expressed as:
 
 $$
-P(Y=y \mid X) =
-\frac{P(X \mid Y=y)P(Y=y)}
-{\sum_{y'} P(X \mid Y=y')P(Y=y')}
+P(X) = \sum_{i=1}^{n} P(X \mid C_i)P(C_i)
 $$
 
-Here, \(y'\) ranges over all possible class labels.
+For example, in spam classification, the possible classes might be `Spam` and `Not Spam`.
 
-Naive Bayes also makes a **conditional independence assumption**: given the class, the features are assumed to be conditionally independent. For features \(X_1, \ldots, X_m\), this is written as:
+The total probability of observing an email is obtained by considering the probability of that email under each class, weighted by the prior probability of that class.
+
+In many classification tasks, the denominator is the same for every candidate class. Therefore, to compare classes, a classifier can often compare the numerators:
 
 $$
-P(X_1, \ldots, X_m \mid Y=y)
-=
-\prod_{k=1}^{m} P(X_k \mid Y=y)
+P(X \mid C)P(C)
 $$
 
-This assumption simplifies the likelihood \(P(X \mid Y=y)\). The Law of Total Probability expresses the denominator \(P(X)\) as a sum across the possible classes.
+The Naive Bayes assumption is a separate concept: it assumes that features are conditionally independent given the class. The Law of Total Probability itself does not require this assumption.
 
-### 7.2 Customer Behavior Prediction
+### 7.2 Customer Segmentation
 
-Suppose customers belong to discrete segments represented by \(S\). The probability that a randomly selected customer makes a purchase is:
+Suppose customers belong to different segments, such as:
+
+- New customers.
+- Returning customers.
+- Premium customers.
+
+Each segment has a different probability of purchasing a product.
+
+The overall purchase probability can be calculated as:
 
 $$
 P(\text{Purchase}) =
-\sum_s P(\text{Purchase} \mid S=s)P(S=s)
+\sum_{i=1}^{n}
+P(\text{Purchase} \mid C_i)P(C_i)
 $$
 
-This is useful when purchase behavior differs across customer segments.
+Here, \(C_i\) represents customer segment \(i\).
 
-### 7.3 Hidden-Variable Models
+This calculation helps analysts estimate overall conversion rates while accounting for the distribution of customer segments.
 
-Suppose an observed random variable \(X\) depends on a discrete latent variable \(Z\). Its marginal probability is obtained by summing over the possible values of \(Z\):
+### 7.3 Latent Variables and Mixture Models
 
-$$
-P(X=x) = \sum_z P(X=x \mid Z=z)P(Z=z)
-$$
+In some machine-learning models, observations can arise from different hidden or latent groups.
 
-For a continuous latent variable \(Z\), the corresponding density formula is:
+Let \(Z\) represent a latent group and \(X\) an observed variable. For discrete latent groups:
 
 $$
-p_X(x) = \int p_{X \mid Z}(x \mid z)p_Z(z)\,dz
+P(X) = \sum_z P(X \mid Z=z)P(Z=z)
 $$
 
-This is a form of marginalization and appears in mixture models and other latent-variable models.
+For a continuous observed variable, the corresponding density can be expressed as:
+
+$$
+p(x) = \sum_z p(x \mid Z=z)P(Z=z)
+$$
+
+where \(p(x)\) is a probability density, rather than the probability of observing one exact continuous value.
+
+For example, a mixture model may describe customer spending as a combination of several customer groups, each with its own spending distribution.
+
+The overall distribution combines the component distributions according to their mixture weights.
 
 ## 8. Common Mistakes
 
-### Mistake 1: Taking an Unweighted Average
+### Mistake 1: Taking a Simple Average Instead of a Weighted Average
 
-A simple average of conditional probabilities is not generally correct:
+Incorrect:
 
 $$
-P(D) = \frac{P(D \mid A) + P(D \mid B)}{2}
+P(D) = \frac{2\% + 5\%}{2} = 3.5\%
 $$
 
-This equals the correct weighted formula only in special cases, such as when the two factories are equally likely to supply the selected product.
+This is incorrect because the factories do not produce equal numbers of products.
 
-The correct formula is:
+Correct:
+
+$$
+P(D) = (0.02)(0.60) + (0.05)(0.40)
+$$
+
+$$
+\boxed{P(D) = 3.2\%}
+$$
+
+A simple average would be appropriate only if the two factories contributed equally to production in this example.
+
+### Mistake 2: Forgetting the Scenario Probabilities
+
+Incorrect:
+
+$$
+P(A) + P(B)
+$$
+
+This only adds the probabilities of the source scenarios. It does not account for the defect rate within each scenario.
+
+Correct:
 
 $$
 P(D) = P(D \mid A)P(A) + P(D \mid B)P(B)
 $$
 
-### Mistake 2: Failing to Cover All Possibilities
+### Mistake 3: Confusing Conditional Probability with Joint Probability
 
-The partition events must cover the entire sample space. If a possible scenario is omitted, the calculation may fail to include all contributions to \(P(A)\).
-
-### Mistake 3: Using Overlapping Scenarios
-
-The standard formula requires mutually exclusive partition events. If scenarios overlap, adding their contributions directly may count some outcomes more than once. Use a valid partition or account for the overlap appropriately.
-
-### Mistake 4: Reversing Conditional Probabilities
-
-In general,
+These expressions are different:
 
 $$
-P(A \mid B) \ne P(B \mid A)
+P(D \mid A)
 $$
 
-The probability that a product is defective given its factory is not the same as the probability that it came from a particular factory given that it is defective.
+and
 
-### Mistake 5: Assuming Independence Is Required
+$$
+P(D \cap A)
+$$
 
-The Law of Total Probability does **not** require \(A\) to be independent of the partition events. The conditional probabilities \(P(A \mid B_i)\) account for how the probability of \(A\) may differ across scenarios.
+The first is the probability of a defect given Factory A. The second is the probability that a product both came from Factory A and is defective.
 
-## 9. Interview Questions and Answers
+They are related by:
+
+$$
+P(D \cap A) = P(D \mid A)P(A)
+$$
+
+### Mistake 4: Using Scenarios That Do Not Form a Partition
+
+The standard form of the Law of Total Probability requires the scenarios to be mutually exclusive and collectively exhaustive.
+
+If the scenarios overlap, adding their contributions directly can double-count outcomes.
+
+If the scenarios do not cover the entire sample space, some possibilities are omitted.
+
+### Mistake 5: Confusing the Law of Total Probability with Bayes' Theorem
+
+The Law of Total Probability calculates an overall event probability from conditional probabilities.
+
+Bayes' theorem uses conditional probabilities and an overall event probability to calculate a posterior probability.
+
+They are related, but they answer different questions.
+
+## 9. Common Interview Questions and Answers
 
 ### Q1. What is the Law of Total Probability?
 
-It calculates the probability of an event by summing its conditional probabilities across a partition of the sample space, weighted by the probabilities of the partition events.
+**Answer:** It is a rule for calculating the probability of an event by dividing the sample space into mutually exclusive and exhaustive scenarios and summing the conditional probability of the event in each scenario, weighted by the probability of that scenario.
 
 $$
 P(A) = \sum_{i=1}^{n} P(A \mid B_i)P(B_i)
@@ -364,88 +475,117 @@ $$
 
 ### Q2. What conditions must the events \(B_i\) satisfy?
 
-They must be mutually exclusive and collectively exhaustive. Together, they form a partition of the sample space.
+**Answer:** They must form a partition of the sample space:
 
-### Q3. Why are conditional probabilities weighted?
+- They must be mutually exclusive.
+- Their union must cover the entire sample space.
+- For the conditional probabilities \(P(A \mid B_i)\) to be defined using the standard ratio formula, each \(P(B_i)\) must be positive.
 
-The scenarios can have different probabilities. Weighting each conditional probability by the probability of its scenario accounts for how frequently that scenario occurs.
+### Q3. Why do we multiply and then add?
 
-### Q4. How is the Law of Total Probability different from Bayes' theorem?
+**Answer:** We multiply to obtain the joint probability of the target event and a particular scenario. We then add these joint probabilities because the scenarios are mutually exclusive and cover all possibilities.
 
-The Law of Total Probability calculates a marginal probability from a partition. Bayes' theorem uses that marginal probability to calculate a posterior conditional probability.
+### Q4. Why is the Law of Total Probability useful?
 
-### Q5. Does the law require independence?
+**Answer:** It allows us to calculate an overall probability when we know conditional probabilities for different groups or scenarios but do not directly know the overall probability.
 
-No. It remains valid whether or not \(A\) is independent of the partition events.
+### Q5. How is it related to Bayes' theorem?
 
-### Q6. Can the law be used with a continuous random variable?
-
-Yes. If \(Z\) is a continuous conditioning variable with density \(p_Z(z)\), then for an event \(A\):
-
-$$
-P(A) = \int P(A \mid Z=z)p_Z(z)\,dz
-$$
-
-This expression averages the conditional probability over the distribution of \(Z\), under the usual conditions for conditional probabilities and integration.
-
-### Q7. How does the law appear in Naive Bayes?
-
-It expresses the marginal probability of the observed features as a sum over the possible classes:
+**Answer:** The Law of Total Probability often provides the denominator in Bayes' theorem.
 
 $$
-P(X) = \sum_y P(X \mid Y=y)P(Y=y)
+P(B \mid A) = \frac{P(A \mid B)P(B)}{P(A)}
 $$
 
-This marginal probability is the denominator in Bayes' theorem. Naive Bayes separately uses conditional independence to simplify the feature likelihood.
+When the possible causes \(B_i\) form a partition, the denominator can be expanded as:
 
-### Q8. Is the Law of Total Probability the same as the addition rule?
+$$
+P(A) = \sum_i P(A \mid B_i)P(B_i)
+$$
 
-No. The addition rule gives the probability of a union of events. The Law of Total Probability applies the addition rule to the disjoint pieces \(A \cap B_i\) created by a partition.
+### Q6. Is the Law of Total Probability a weighted average?
+
+**Answer:** Yes. It is a weighted average of conditional probabilities, with the probabilities of the partition events serving as weights. These weights are nonnegative and sum to one.
+
+### Q7. Does the Law of Total Probability require independence?
+
+**Answer:** No. It does not require the target event and the partition events to be independent. It uses conditional probabilities and a partition of the sample space.
+
+### Q8. Where does this law appear in machine learning?
+
+**Answer:** It appears in Bayesian classification, probability calculations across customer segments, and latent-variable models. In Naive Bayes, it can be used to express the marginal probability of the observed features by summing across classes.
 
 ## 10. Key Takeaways
 
-- The Law of Total Probability calculates an overall probability by combining all scenarios in a partition.
-- The partition events must be mutually exclusive and collectively exhaustive.
+- The Law of Total Probability calculates an overall probability by considering all possible scenarios.
+- The scenarios must form a mutually exclusive and exhaustive partition of the sample space.
 - Each conditional probability is weighted by the probability of its corresponding scenario.
-- The general formula is:
+- The formula is a weighted average, not necessarily a simple average.
+- It is closely related to the multiplication rule, addition rule, and Bayes' theorem.
+- It does not require independence.
+- It is useful in Bayesian reasoning, classification, segmentation, and latent-variable models.
+
+The main formula to remember is:
 
 $$
+\boxed{
 P(A) = \sum_{i=1}^{n} P(A \mid B_i)P(B_i)
+}
 $$
 
-- The law does not require independence.
-- It is closely related to conditional probability, Bayes' theorem, and marginalization.
-- In machine learning, it appears in Naive Bayes, probabilistic classification, and latent-variable models.
-- **Interview tip:** Explain why the conditional probabilities are weighted by the probabilities of their scenarios instead of simply averaged.
+## 11. Practice Problem
 
-## 11. Quick Practice Question
+A website receives visitors from mobile devices and desktop computers.
 
-A website receives 70% of its visitors from mobile devices and 30% from desktop devices. The probability of a purchase is 4% for mobile visitors and 6% for desktop visitors.
+- 70% of visitors use mobile devices.
+- 30% of visitors use desktop computers.
+- 4% of mobile visitors make a purchase.
+- 6% of desktop visitors make a purchase.
 
-What is the overall probability that a randomly selected visitor makes a purchase?
+What is the probability that a randomly selected visitor makes a purchase?
 
-Using the Law of Total Probability:
+### Solution
+
+Let \(M\) represent a mobile visitor, \(D\) represent a desktop visitor, and \(P\) represent a purchase.
+
+The given probabilities are:
 
 $$
-\begin{aligned}
-P(\text{Purchase}) ={}&
-P(\text{Purchase} \mid \text{Mobile})P(\text{Mobile}) \\
-&+ P(\text{Purchase} \mid \text{Desktop})P(\text{Desktop})
-\end{aligned}
+P(M) = 0.70
+$$
+
+$$
+P(D) = 0.30
+$$
+
+$$
+P(P \mid M) = 0.04
+$$
+
+$$
+P(P \mid D) = 0.06
+$$
+
+Apply the Law of Total Probability:
+
+$$
+P(P) = P(P \mid M)P(M) + P(P \mid D)P(D)
 $$
 
 Substitute the values:
 
 $$
-P(\text{Purchase}) = (0.04)(0.70) + (0.06)(0.30)
+P(P) = (0.04)(0.70) + (0.06)(0.30)
 $$
 
 $$
-P(\text{Purchase}) = 0.028 + 0.018 = 0.046
+P(P) = 0.028 + 0.018
 $$
 
-**Answer:**
+Therefore:
 
 $$
-\boxed{P(\text{Purchase}) = 4.6\%}
+\boxed{P(P) = 0.046 = 4.6\%}
 $$
+
+**Final answer:** The probability that a randomly selected visitor makes a purchase is **4.6%**.
