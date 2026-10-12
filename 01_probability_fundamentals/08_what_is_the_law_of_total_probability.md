@@ -145,7 +145,7 @@ $$
 Therefore:
 
 $$
-\boxed{P(D) = 0.032 = 3.2\%}
+P(D) = 0.032 = 3.2\%
 $$
 
 ### Interpretation
@@ -298,11 +298,9 @@ Substitute the values:
 $$
 P(A \mid D) = \frac{(0.02)(0.60)}{0.032}
 $$
-
 Therefore:
-
 $$
-\boxed{P(A \mid D) = 0.375 = 37.5\%}
+P(A \mid D) = 0.375 = 37.5\%
 $$
 
 **Interpretation:** If a product is known to be defective, the probability that it came from Factory A is 37.5%.
