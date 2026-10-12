@@ -429,8 +429,7 @@ The overall probability of evidence includes all ways that the evidence can occu
 For a positive medical test:
 
 $$
-P(+) = P(+ \mid D)P(D)
-+ P(+ \mid \neg D)P(\neg D)
+P(+) = P(+ \mid D)P(D) + P(+ \mid \neg D)P(\neg D)
 $$
 
 Ignoring false positives can substantially overestimate the probability of disease.
